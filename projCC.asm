@@ -1761,12 +1761,36 @@ calcAddBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng calc
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg  one
+	sub al,30h
+	jmp two
+one:
+	sub al,37h
+two:
+	mov ch,al
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg three
+	sub al,30h
+	jmp four
+three:
+	sub al,37h
+four:
+	mov cl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg five
+	sub al,30h
+	jmp six
+five:
+	sub al,37h
+six:
+	mov bl,al
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0B14h
@@ -1784,12 +1808,39 @@ calcAddBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng calc
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg seven
+	sub al,30h
+	jmp eight
+seven:
+	sub al,37h
+eight:
+	mov ah,ch
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg nine
+	sub al,30h
+	jmp ten
+nine:
+	sub al,37h
+ten:
+	mov ah,cl
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcAddBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg eleven
+	sub al,30h
+	jmp twelve
+eleven:
+	sub al,37h
+twelve:
+	mov ah,bl
+	push ax
 	;insert computation process here	
 	mov ah,02h	
 	mov dx,0D19h
@@ -1798,6 +1849,124 @@ calcAddBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng calc
 	lea dx, calcAddBase16SubMenuSum
 	int 21h	
 	;put the answer here	
+	 ;process
+	mov bx,0000h
+	mov cx,0000h
+	mov dx,0000h
+    pop bx
+    add bh,bl
+    cmp bh,0Fh
+    jg Base16Div
+	cmp bh,09h
+	jg  next
+    add bh,30h
+	jmp copy
+next:
+	add bh,37h
+copy:
+    mov ch,bh 
+    jmp SecondPartb16
+Base16Div:
+    mov ax,0000h
+    mov al,bh
+    mov bl,10h
+    div bl
+    mov ch,ah
+	cmp ch,09h
+	jg next1
+    add ch,30h 
+	jmp copy1
+next1:
+	add ch,37h
+copy1:
+    mov dh,al  
+SecondPartb16: 
+    pop bx
+    add bh,bl
+    add bh,dh
+    cmp bh,0Fh
+    jg Base16Div2
+	cmp bh,09h
+	jg next2
+    add bh,30h
+	jmp copy2
+next2:
+	add bh,37h
+copy2:
+    mov cl,bh 
+    jmp ThirdPartb16
+Base16Div2:
+    mov ax,0000h
+    mov al,bh
+    mov bl,10h
+    div bl
+    mov cl,ah
+	cmp cl,09h
+	jg next3
+    add cl,30h
+	jmp copy3
+next3:
+	add cl,37h
+copy3:
+    mov dh,al  
+ThirdPartb16: 
+    pop bx
+    add bh,bl
+    add bh,dh
+    cmp bh,0Fh
+    jg Base16Div3
+	cmp bh,09h
+	jg next4
+    add bh,30h
+	jmp copy4
+next4:
+	add bh,37h
+copy4:
+    mov dl,bh
+    jmp NoQuotientb16
+Base16Div3:
+    mov ax,0000h
+    mov al,bh
+    mov bl,10h
+    div bl
+    mov bh,ah
+	cmp bh,09h
+	jg next5
+    add bh,30h
+	jmp copy5
+next5:
+	add bh,37h
+copy5:
+    mov bl,al  
+    jmp Quotientb16
+NoQuotientb16:
+    mov ah,02h
+    mov dl,30h
+    int 21h
+    mov dl,2Eh
+    int 21h
+    mov dl,bh
+    int 21h
+    mov dl,cl
+    int 21h
+    mov dl,ch
+    int 21h
+    jmp ReuseBase16
+Quotientb16:
+    mov ah,02h
+    mov dl,bl 
+    add dl,30h
+    int 21h
+    mov dl,2Eh
+    int 21h
+    mov dl,bh
+    int 21h
+    mov dl,cl
+    int 21h
+    mov dl,ch
+    int 21h
+ReuseBase16:
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
