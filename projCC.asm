@@ -1602,6 +1602,7 @@ SecondPartb5: ;
     pop bx
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,04h
     jg Base5Div2
     add bh,30h
@@ -1619,6 +1620,7 @@ ThirdPartb5:
     pop bx
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,04h
     jg Base5Div3
     add bh,30h
@@ -1884,6 +1886,7 @@ SecondPartb16:
     pop bx
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,0Fh
     jg Base16Div2
 	cmp bh,09h
@@ -1913,6 +1916,7 @@ ThirdPartb16:
     pop bx
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,0Fh
     jg Base16Div3
 	cmp bh,09h
@@ -2148,6 +2152,7 @@ SecondPart:
     pop bx ;SECOND POP
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,01h
     jg BinaryDiv2
     add bh,30h
@@ -2165,6 +2170,7 @@ ThirdPart:
     pop bx ; THIRD POP
     add bh,bl
     add bh,dh
+	sub dh,dh
     cmp bh,01h
     jg BinaryDiv3
     add bh,30h
