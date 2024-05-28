@@ -16,8 +16,7 @@
 	calcDiv 					db  "[2] Division$"
 	calcAdd 					db  "[3] Addition$"
 	calcSubt 					db  "[4] Subtraction$"
-	calcModulo					db  "[5] Modulo$"
-	calcBack					db  "[6] Back to Main Menu$"
+	calcBack					db  "[5] Back to Main Menu$"
 	calcInput 					db  "Enter your choice: $"
 	;-------------- CALCULATOR MULTIPLICATION SUBMENU BASES --------------;	
 	calcMulSubMenuH1 			db 	"CALCULATOR SUBMENU$" 
@@ -62,6 +61,7 @@
 	calcDivBase5SubMenuDivi1	db  "Dividend [0.000 - 0.444]: $"
 	calcDivBase5SubMenuDivi2 	db  "Divisor [0.000 - 0.444]: $"
 	calcDivBase5SubMenuQuo 		db  "The quotient is : $"
+	calcModuloBase5SubMenuQuo 	db  "The remainder is : $"
 	calcDivBase5SubMenuAgain    db 	"Use operation again [Y/N]: $"
 	;BASE 16
 	calcDivBase16SubMenuH1 		db 	"CALCULATOR SUBMENU$"
@@ -69,13 +69,15 @@
 	calcDivBase16SubMenuDivi1	db  "Dividend [0.000 - 0.FFF]: $"
 	calcDivBase16SubMenuDivi2 	db  "Divisor [0.000 - 0.FFF]: $"
 	calcDivBase16SubMenuQuo 	db  "The quotient is : $"
-	calcDivBase16SubMenuAgain    db  "Use operation again [Y/N]: $"
+	calcModuloBase16SubMenuQuo 	db  "The remainder is : $"
+	calcDivBase16SubMenuAgain   db  "Use operation again [Y/N]: $"
 	;BASE 2
 	calcDivBase2SubMenuH1 		db 	"CALCULATOR SUBMENU$"
 	calcDivBase2SubMenuH2 		db  "Base 2 Division$"
 	calcDivBase2SubMenuDivi1	db  "Dividend [0.000 - 0.111]: $"
 	calcDivBase2SubMenuDivi2 	db  "Divisor [0.000 - 0.111]: $"
 	calcDivBase2SubMenuQuo 		db  "The quotient is : $"
+	calcModuloBase2SubMenuQuo 	db  "The remainder is : $"
 	calcDivBase2SubMenuAgain    db  "Use operation again [Y/N]: $" 
 	;-------------- CALCULATOR ADDITION SUBMENU BASES --------------;
 	calcAddSubMenuH1 			db 	"CALCULATOR SUBMENU$" 
@@ -135,35 +137,6 @@
 	calcSubtBase2SubMenuMinu 	db  "Minuend [0.000 - 0.111]: $"
 	calcSubtBase2SubMenuDiff 	db  "The difference is : $"
 	calcSubtBase2SubMenuAgain   db  "Use operation again [Y/N]: $" 
-	;-------------- CALCULATOR MODULO SUBMENU BASES --------------;
-	calcModuloSubMenuH1 			db 	"CALCULATOR SUBMENU$" 
-	calcModuloSubMenuH2 			db  "Modulo$"
-	calcModuloBase5SubMenu 			db  "[1] Base 05$"
-	calcModuloBase16SubMenu 		db  "[2] Base 16$"
-	calcModuloBase2SubMenu 			db  "[3] Base 02$"
-	calcModuloBackSubMenu      		db  "[4] Back to Calculator Menu$"
-	calcModuloInputSubMenu			db   "Enter your choice: $"
-	;BASE 5
-	calcModuloBase5SubMenuH1 		db 	"CALCULATOR SUBMENU$" 
-	calcModuloBase5SubMenuH2 		db  "Base 5 Modulo$"
-	calcModuloBase5SubMenuDivi1		db  "Dividend [0.000 - 0.444]: $"
-	calcModuloBase5SubMenuDivi2 	db  "Divisor [0.000 - 0.444]: $"
-	calcModuloBase5SubMenuQuo 		db  "The remainder is : $"
-	calcModuloBase5SubMenuAgain    	db 	"Use operation again [Y/N]: $"
-	;BASE 16
-	calcModuloBase16SubMenuH1 		db 	"CALCULATOR SUBMENU$"
-	calcModuloBase16SubMenuH2 		db  "Base 16 Modulo$"
-	calcModuloBase16SubMenuDivi1	db  "Dividend [0.000 - 0.FFF]: $"
-	calcModuloBase16SubMenuDivi2 	db  "Divisor [0.000 - 0.FFF]: $"
-	calcModuloBase16SubMenuQuo 		db  "The remainder is : $"
-	calcModuloBase16SubMenuAgain    db  "Use operation again [Y/N]: $"
-	;BASE 2
-	calcModuloBase2SubMenuH1 		db 	"CALCULATOR SUBMENU$"
-	calcModuloBase2SubMenuH2 		db  "Base 2 Modulo$"
-	calcModuloBase2SubMenuDivi1		db  "Dividend [0.000 - 0.111]: $"
-	calcModuloBase2SubMenuDivi2 	db  "Divisor [0.000 - 0.111]: $"
-	calcModuloBase2SubMenuQuo 		db  "The remainder is : $"
-	calcModuloBase2SubMenuAgain    	db  "Use operation again [Y/N]: $" 
 	;-------------- CONVERSION SUBMENU --------------;    
 	convMenu 					db "CONVERSION MENU$"
 	convBase7Menu				db "[1] Base 07$"  
@@ -190,18 +163,18 @@
     convBase5BackSubMenu 		db "[2] Back to Conversion Menu$"
     convBase5InputSubMenu 		db "Enter your choice:  $"   
 	convBase5to10SubMenuH1 		db "CONVERSION$"
-    convBase5to10SubMenuH2 		db "Base 5 Base 10$"
+    convBase5to10SubMenuH2 		db "Base 5 to Base 10$"
     convBase5to10InputSubMenu 	db "Input a number [0.000 - 0.444]: $"
     convBase5to10OutputSubMenu 	db "Base 10 Equivalent is: $"
     convBase5to10SubMenuAgain 	db "Use operation again [Y/N]: $"   
     ;FOR BASE 2
     convBase2SubMenuH1 			db "CONVERSION SUBMENU$"
     convBase2SubMenuH2 			db "BASE 2$"
-    convBase2to8SubMenu 		db "[1]Base 2 to Base 8 $"
+    convBase2to8SubMenu 		db "[1] Base 2 to Base 8 $"
     convBase2BackSubMenu 		db "[2] Back to Conversion Menu$"
-    convBase2InputSubMenu 		db "Base 8 conversion is: $"    
+    convBase2InputSubMenu 		db "Enter your choice: $"    
     convBase2to8SubMenuH1 		db "CONVERSION$"
-    convBase2to8SubMenuH2 		db "Base 2 Base 8$"
+    convBase2to8SubMenuH2 		db "Base 2 to Base 8$"
     convBase2to8InputSubMenu 	db "Input a number [0.000 - 0.111]: $"
     convBase2to8OutputSubMenu 	db "Base 8 Equivalent is: $"
     convBase2to8SubMenuAgain 	db "Use operation again [Y/N]: $"
@@ -335,16 +308,10 @@ calcScreenMenu: ;start ng calcu menu
 	mov dx,0D1Ah
 	int 10h
 	mov ah, 09h
-	lea dx, calcModulo
-	int 21h
-	mov ah,02h
-	mov dx,0E1Ah
-	int 10h
-	mov ah, 09h
 	lea dx, calcBack
 	int 21h
 	mov ah,02h
-	mov dx,101Ah
+	mov dx,0F1Ah
 	int 10h
 	mov ah, 09h
 	lea dx, calcInput
@@ -360,12 +327,10 @@ calcScreenMenu: ;start ng calcu menu
 	cmp al, 34h
 	je CalcLoadSubtBase
 	cmp al, 35h
-	je CalcLoadModuloBase
-	cmp al, 36h
 	je CalcLoadHomeScreen
 	cmp al, 30h
 	jle CalcLoadErrorInput
-	cmp al, 37h
+	cmp al, 36h
 	jge CalcLoadErrorInput
 CalcLoadMulBase:
 	jmp calcMulBase
@@ -375,8 +340,6 @@ CalcLoadAddBase:
 	JMP calcAddBase
 CalcLoadSubtBase:
 	JMP calcSubtBase
-CalcLoadModuloBase:
-	JMP calcModuloBase
 CalcLoadHomeScreen:
 	JMP HomeScreenMenu
 CalcLoadErrorInput:
@@ -529,8 +492,7 @@ calcMulBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	sub al,30h
 	shl bx,04
 	add bl,al
-	push bx
-	;insert computation process here
+	push bx	
 	mov bh,00h
 	mov ah,02h	
 	mov dx,0B14h
@@ -564,20 +526,18 @@ calcMulBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	sub al,30h
 	shl cx,04h
 	add cl,al
-	push cx
-	;insert computation process here
+	push cx	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcMulBase5SubMenuProduct
 	int 21h		
-	;put the answer here
 	jmp firstb5
 JumpingJohn:
 	jmp	CalcMulBase5LoadNumErrorInput2
 firstb5:
-		;First Value
+	;First Value
 	pop cx
 	pop bx
 	mov dx,0000h
@@ -591,8 +551,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -605,8 +564,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,cl
@@ -623,8 +581,7 @@ firstb5:
 	shl al,04h
 	pop dx
 	add al,dh
-	push ax
-	
+	push ax	
 	;Second Value
 	mov dx,0000h
 	mov dl,bl
@@ -637,8 +594,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -651,8 +607,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,cl
@@ -669,8 +624,7 @@ firstb5:
 	shl al,04h
 	pop dx
 	add al,dh
-	push ax
-	
+	push ax	
 	;Third Value
 	mov dx,0000h
 	mov ax,0000h
@@ -684,8 +638,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -698,8 +651,7 @@ firstb5:
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,ch
@@ -722,8 +674,7 @@ firstb5:
 	mov ax,0000h
 	pop dx ;third
 	pop cx ;second
-	pop bx ;first
-	
+	pop bx ;first	
 	mov ax,dx
 	shr ax,0Ch
 	push ax
@@ -760,13 +711,11 @@ firstb5:
 	;fifthline
 	mov ax,bx
 	and ax,000Fh
-	push ax
-	
+	push ax	
 	xor ax,ax
 	xor bx,bx
 	xor cx,cx
-	xor dx,dx
-	
+	xor dx,dx	
 	pop bx
 	;first end
 	pop ax
@@ -851,22 +800,17 @@ firstb5:
 	shl al,04h
 	add cl,al
 	;sixth end 
-	;finish na?
-	
 	mov bl, bh
-    mov bh, cl
-    
+    mov bh, cl   
     mov dh, bh
     mov cl, bl ;ito ang titignan
     and cl, 0Fh
     mov ch, bl 
     and ch, 0F0h
-    shr ch, 04h
-    
+    shr ch, 04h   
     cmp cl, 04h
     jae roundmulb5
-    jmp printmulb5
-    
+    jmp printmulb5   
 	roundmulb5:
     add bx, 0010h
     and bx, 0FFF0h
@@ -876,7 +820,7 @@ firstb5:
     cmp dl, 05h
     jae roundmulb5first
     jmp printmulb5
-	roundmulb5first:
+roundmulb5first:
     add bx, 0100h
     and bx, 0FF00h
     mov dx, bx
@@ -885,28 +829,24 @@ firstb5:
     cmp dl, 05h
     jae roundmulb5sec
     jmp printmulb5
-	roundmulb5sec:
-    add bx, 0100h
-    and bx, 0F000h
-    
-	printmulb5:
-    mov ah, 02h
-    mov dl, 30h
-    int 21h
-    mov dl, 2Eh
-    int 21h
-    mov cx, 0003h
-	popinmulb5:
-    rol bx, 04h   
-    mov dx, bx
-    and dx, 000Fh
-    add dx, 3030h
-    int 21h
-    loop popinmulb5
-	
-
-ReuseBase5Mul:
-	
+roundmulb5sec:
+	add bx, 0100h
+    and bx, 0F000h   
+printmulb5: 
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov cx, 0003h
+popinmulb5: 
+	rol bx, 04h   
+	mov dx, bx
+	and dx, 000Fh
+	add dx, 3030h
+	int 21h
+	loop popinmulb5
+ReuseBase5Mul:	
 	mov bx,0000h
 	mov ah,02h	
 	mov dx,0f17h
@@ -1045,8 +985,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	add bl,al
 	push bx
 	xor bx,bx
-	xor cx,cx
-	;insert computation process here
+	xor cx,cx	
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -1094,18 +1033,15 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	sub al,37h
 	shippingB3:
 	shl cx,04h
-	add cl,al
-	;insert computation process here
+	add cl,al	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcMulBase16SubMenuProduct
 	int 21h		
-	;put the answer here
    ;process
-	pop bx
-	
+	pop bx	
 	;First Value
 	mov dx,0000h
 	mov dl,bl
@@ -1118,8 +1054,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -1132,8 +1067,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,cl
@@ -1150,8 +1084,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	shl al,04h
 	pop dx
 	add al,dh
-	push ax
-	
+	push ax	
 	;Second Value
 	mov dx,0000h
 	mov dl,bl
@@ -1164,8 +1097,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -1178,8 +1110,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,cl
@@ -1196,8 +1127,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	shl al,04h
 	pop dx
 	add al,dh
-	push ax
-	
+	push ax	
 	;Third Value
 	mov dx,0000h
 	mov ax,0000h
@@ -1211,8 +1141,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov dl,bl
 	shr dl,04h
@@ -1225,8 +1154,7 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	div dl
 	mov dh,al
 	mov al,00h
-	push ax
-	
+	push ax	
 	mov ax,0000h
 	mov al,bh
 	mov dl,ch
@@ -1287,13 +1215,11 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	;fifthline
 	mov ax,bx
 	and ax,000Fh
-	push ax
-	
+	push ax	
 	xor ax,ax
 	xor bx,bx
 	xor cx,cx
-	xor dx,dx
-	
+	xor dx,dx	
 	pop bx
 	;first end
 	pop ax
@@ -1378,64 +1304,58 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	shl al,04h
 	add cl,al
 	;sixth end 
-	;finish na?
-	
 	mov bl, bh
-    mov bh, cl
-    
+    mov bh, cl   
     mov dh, bh
     mov cl, bl ;ito ang titignan
     and cl, 0Fh
     mov ch, bl 
     and ch, 0F0h
-    shr ch, 04h
-    
+    shr ch, 04h   
     cmp cl, 0Fh
     jae roundmulb2b16
-    jmp printmulb2b16
-    
-	roundmulb2b16:
-    add bx, 0010h
-    and bx, 0FFF0h
-    mov dx, bx
-    shr dx, 04h
-    and dx, 000Fh
-    cmp dl, 10h
-    jae roundmulb2firstb16
-    jmp printmulb2b16
-	roundmulb2firstb16:
-    add bx, 0100h
-    and bx, 0FF00h
-    mov dx, bx
-    shr dx, 08h
-    and dx, 000Fh
-    cmp dl, 10h
-    jae roundmulb2secb16
-    jmp printmulb2b16
-	roundmulb2secb16:
-    add bx, 0100h
-    and bx, 0F000h
-    
-	printmulb2b16:
-    mov ah, 02h
-    mov dl, 30h
-    int 21h
-    mov dl, 2Eh
-    int 21h
-    mov cx, 0003h
-	popinmulb2b16:
-    rol bx, 04h   
-    mov dx, bx
-    and dx, 000Fh
+    jmp printmulb2b16    
+roundmulb2b16:
+	add bx, 0010h
+	and bx, 0FFF0h
+	mov dx, bx
+	shr dx, 04h
+	and dx, 000Fh
+	cmp dl, 10h
+	jae roundmulb2firstb16
+	jmp printmulb2b16
+roundmulb2firstb16:
+	add bx, 0100h
+	and bx, 0FF00h
+	mov dx, bx
+	shr dx, 08h
+	and dx, 000Fh
+	cmp dl, 10h
+	jae roundmulb2secb16
+	jmp printmulb2b16
+roundmulb2secb16:
+	add bx, 0100h
+	and bx, 0F000h  
+printmulb2b16:
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov cx, 0003h
+popinmulb2b16:
+	rol bx, 04h   
+	mov dx, bx
+	and dx, 000Fh
 	cmp dx,	0009h
 	jg add37ABC
-    add dx, 3030h
+	add dx, 3030h
 	jmp displayb16
-	add37ABC:
+add37ABC:
 	add dx,	3037h
-	displayb16:
-    int 21h
-    loop popinmulb2b16
+displayb16:
+	int 21h
+	loop popinmulb2b16
 ReuseBase16Mul:
 	mov bh,00h
 	mov ah,02h	
@@ -1557,8 +1477,7 @@ calcMulBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	call CalcMulBase2LoadNumChecker
 	sub al,30h
 	shl cx,04
-	add cl,al
-	;insert computation process here
+	add cl,al	
 	mov ah,02h
 	mov dx,0B14h
 	int 10h
@@ -1591,8 +1510,7 @@ calcMulBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	sub al,30h
 	shl bx,04h
 	add bl,al
-	push bx
-	;insert computation process here
+	push bx	
 	mov bh,00h
 	mov ah,02h
 	mov dx,0D19h
@@ -1600,15 +1518,13 @@ calcMulBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	mov ah, 09h
 	lea dx, calcMulBase2SubMenuProduct
 	int 21h	
-	;put the answer here
 	;cx Multiplicand
 	;bx Multiplier
 	jmp firstfirts
 	JumpingJack:
 	jmp CalcMulBase2LoadNumErrorInput2
 firstfirts:
-;1st
-	pop bx
+	pop bx ;1st
 	mov ax,cx
 	mov dx,bx
 	and ax,000Fh
@@ -1631,8 +1547,7 @@ firstfirts:
 	pop dx 
 	add al,dl
 	push ax
-;2nd	
-	mov ax,cx
+	mov ax,cx ;2nd	
 	mov dx,bx
 	and ax,000Fh
 	and dx,00F0h
@@ -1655,8 +1570,7 @@ firstfirts:
 	pop dx 
 	add al,dl
 	push ax
-;3rd
-	mov ax,cx
+	mov ax,cx ;3rd
 	mov dx,bx
 	and ax,000Fh
 	and dx,0F00h
@@ -1679,22 +1593,18 @@ firstfirts:
 	pop dx 
 	add al,dl
 	push ax
-	
-;line-up process
+	;line-up process
     pop bx ;third value
     pop cx ;second val
-    pop dx ;first val
-    
+    pop dx ;first val   
     mov ax, bx
     and ax, 0F000h
-    push ax
-    
+    push ax    
     mov ah, bh
     and ah, 0Fh
     mov al, ch
     shr al, 04h
-    push ax
-    
+    push ax   
     mov al, bl
     shr al, 04h
     mov ah, ch
@@ -1702,8 +1612,7 @@ firstfirts:
     add al, ah
     mov ah, dh
     shr ah, 04h
-    push ax
-    
+    push ax   
     mov al, bl
     and al, 0Fh
     mov ah, cl
@@ -1711,23 +1620,18 @@ firstfirts:
     add al, ah
     mov ah, dh
     and ah, 0Fh
-    push ax
-    
+    push ax   
     mov ah, dl
     shr ah, 04h 
     mov al, cl
     and al, 0Fh
-    push ax
-    
+    push ax 
     mov al, dl
     and ax, 000Fh
     push ax
-	
-;addition process
-    mov cx, 0000h
+    mov cx, 0000h ;addition process
     mov dx, 0000h
-    pop bx ;first line up
-    
+    pop bx ;first line up  
     pop ax ;second line up
     add al, ah
     cmp al, 0Bh
@@ -1741,8 +1645,7 @@ first_div:
     div dl
     shl ah, 04h
     add bl, ah
-    mov dh, al
-    
+    mov dh, al   
 third_process:
     pop ax ;third line-up
     mov dl, al
@@ -1761,8 +1664,7 @@ sec_div:
     mov dl, 02h
     div dl
     add bh, ah
-    mov dh, al
-    
+    mov dh, al   
 fourth_process:
     pop ax ;fourth line-up
     mov dl,al
@@ -1783,8 +1685,7 @@ third_div:
     div dl
     shl ah, 04h
     add bh, ah
-    mov dh, al
-    
+    mov dh, al    
 fifth_process:
     pop ax ;fifth line-up
     add al, ah
@@ -1807,48 +1708,42 @@ final_proccess:
     add al, ah
     add cl, al
     push cx
-    push bx
-	
+    push bx	
 ResultPrinting:
 	pop bx
-    pop cx
-    
+    pop cx    
     mov bl, bh
-    mov bh, cl
-    
+    mov bh, cl   
     mov dh, bh
     mov cl, bl ;ito ang titignan
     and cl, 0Fh
     mov ch, bl 
     and ch, 0F0h
-    shr ch, 04h
-    
+    shr ch, 04h   
     cmp cl, 01h
     jae roundmulb2
-    jmp printmulb2
-    
+    jmp printmulb2   
 roundmulb2:
-     add bx, 0010h
-     and bx, 0FFF0h
-     mov dx, bx
-     shr dx, 04h
-     and dx, 000Fh
-     cmp dl, 02h
-     jae roundmulb2first
-     jmp printmulb2
+    add bx, 0010h
+    and bx, 0FFF0h
+    mov dx, bx
+    shr dx, 04h
+    and dx, 000Fh
+    cmp dl, 02h
+    jae roundmulb2first
+    jmp printmulb2
 roundmulb2first:
-     add bx, 0100h
-     and bx, 0FF00h
-     mov dx, bx
-     shr dx, 08h
-     and dx, 000Fh
-     cmp dl, 02h
-     jae roundmulb2sec
-     jmp printmulb2
+    add bx, 0100h
+    and bx, 0FF00h
+    mov dx, bx
+    shr dx, 08h
+    and dx, 000Fh
+    cmp dl, 02h
+    jae roundmulb2sec
+    jmp printmulb2
 roundmulb2sec:
-     add bx, 0100h
-     and bx, 0F000h
-    
+    add bx, 0100h
+    and bx, 0F000h   
 printmulb2:
     mov ah, 02h
     mov dl, 30h
@@ -1863,7 +1758,6 @@ popinmulb2:
     add dx, 3030h
     int 21h
     loop popinmulb2
-
 ReuseMultiplicationBase2:
 	mov ah,02h
 	mov bx,0000h
@@ -2058,8 +1952,7 @@ calcDivBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	call CalcDivBase5LoadNumChecker
 	mov ah, 01h ;3rd decimal place
 	int 21h
-	call CalcDivBase5LoadNumChecker
-	;insert computation process here
+	call CalcDivBase5LoadNumChecker	
 	mov ah,02h	;centerscreen
 	mov dx,0B14h
 	int 10h
@@ -2081,17 +1974,22 @@ calcDivBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	call CalcDivBase5LoadNumChecker
 	mov ah, 01h ;3rd decimal place
 	int 21h
-	call CalcDivBase5LoadNumChecker
-	;insert computation process here	
+	call CalcDivBase5LoadNumChecker		
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase5SubMenuQuo
 	int 21h		
-	;put the answer here
+	mov bh,00h
+	mov ah,02h
+    mov dx,0E19h
+    int 10h
+    mov ah, 09h
+    lea dx, calcModuloBase5SubMenuQuo
+    int 21h
 	mov ah,02h	
-	mov dx,0f17h
+	mov dx,1017h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase5SubMenuAgain ;use again
@@ -2131,13 +2029,13 @@ CalcDivBase5Load0NumRetInput:
 	ret
 errorCalcDivBase5SubMenuYNInput: 
 	mov ah,02h		
-	mov dx,111fh
-	int 10h
+	mov dx,121fh
+	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2147,13 +2045,13 @@ errorCalcDivBase5SubMenuYNInput:
 	jmp calcDivBase5
 errorCalcDivBase5SubMenuNUMInput: 
 	mov ah,02h		
-	mov dx,111fh
+	mov dx,121fh
 	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2196,7 +2094,6 @@ calcDivBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcDivBase16LoadLetterNumErrorInput
-	;insert computation process here
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -2217,17 +2114,22 @@ calcDivBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	call CalcDivBase16LoadLetterNumErrorInput
 	mov ah, 01h ;3rd decimal place
 	int 21h
-	call CalcDivBase16LoadLetterNumErrorInput
-	;insert computation process here
+	call CalcDivBase16LoadLetterNumErrorInput	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase16SubMenuQuo
 	int 21h	
-	;put the answer here	
+	mov bh,00h
+	mov ah,02h
+    mov dx,0E19h
+    int 10h
+    mov ah, 09h
+    lea dx, calcModuloBase16SubMenuQuo
+    int 21h	
 	mov ah,02h	
-	mov dx,0f17h
+	mov dx,1017h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase16SubMenuAgain ;use again
@@ -2270,14 +2172,14 @@ CalcDivBase16Load0NumErrorInput:
 CalcDivBase16Load0NumRetInput:
 	ret
 errorCalcDivBase16SubMenuYNInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
+	mov ah,02h		
+	mov dx,121fh
+	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2286,14 +2188,14 @@ errorCalcDivBase16SubMenuYNInput:
 	int 21h
 	jmp calcDivBase16
 errorCalcDivBase16SubMenuNUMInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
+	mov ah,02h		
+	mov dx,121fh
+	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2337,8 +2239,7 @@ AA:
     shl bx, 01h
     or bx, ax
 	loop AA
-	push bx
-	;insert computation process here
+	push bx	
 	xor bx,bx
 	mov ah,02h	
 	mov dx,0B14h
@@ -2363,25 +2264,21 @@ BB:
     or bx, ax
 	loop BB
 	push bx
-	xor bx,bx
-	;insert computation process here
+	xor bx,bx	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase2SubMenuQuo
 	int 21h		
-	;put the answer here
-	jmp divide2
-	
+	jmp divide2	
 jumpingrope:
 	jmp CalcDivBase2LoadNumErrorInput2
 divide2:
 	pop bx
     pop ax
     div bl
-    push ax
-    
+    push ax   
     mov bl, al
     mov ah, 02h
     mov cl, 04h
@@ -2393,16 +2290,14 @@ divide2:
     and dl, 01h
     add dl, 30h
 	int 21h
-    loop .out1
-	
+    loop .out1	
 	mov bh,00h
 	mov ah,02h
     mov dx,0E19h
     int 10h
     mov ah, 09h
     lea dx, calcModuloBase2SubMenuQuo
-    int 21h
-	
+    int 21h	
 	pop ax
     mov bl, ah
     mov ah, 02h
@@ -2415,12 +2310,11 @@ divide2:
     and dl, 01h
     add dl, 30h
     int 21h
-    loop .out2
-	
+    loop .out2	
 ReuseBase2Div:
 	mov bh,00h
 	mov ah,02h	
-	mov dx,0f17h
+	mov dx,1017h
 	int 10h
 	mov ah, 09h
 	lea dx, calcDivBase2SubMenuAgain ;use again
@@ -2469,14 +2363,14 @@ errorcalcDivBase2SubMenucntr1 :
 	int 10h
 	ret
 errorCalcDivBase2SubMenuYNInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
+	mov ah,02h		
+	mov dx,121fh
+	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2485,14 +2379,14 @@ errorCalcDivBase2SubMenuYNInput:
 	int 21h
 	jmp calcDivBase2
 errorCalcDivBase2SubMenuNUMInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
+	mov ah,02h		
+	mov dx,121fh
+	int 10h	
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	mov ah,02h	
-	mov dx,1218h
+	mov dx,1318h
 	int 10h
 	mov ah, 09h
 	lea dx, errorKey
@@ -2627,8 +2521,7 @@ calcAddBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	int 21h
 	call CalcAddBase5LoadNumChecker
 	sub al,30h
-	mov bl,al
-	;insert computation process here
+	mov bl,al	
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -2659,17 +2552,14 @@ calcAddBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	call CalcAddBase5LoadNumChecker
 	sub al,30h
 	mov ah,bl
-	push ax
-	;insert computation process here	
+	push ax		
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcAddBase5SubMenuSum
-	int 21h
-	;put the answer here
-	 ;process
-	mov bx,0000h
+	int 21h 
+	mov bx,0000h ;process
 	mov cx,0000h
 	mov dx,0000h
     pop bx
@@ -2883,8 +2773,7 @@ four:
 five:
 	sub al,37h
 six:
-	mov bl,al
-	;insert computation process here
+	mov bl,al	
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -2894,7 +2783,6 @@ six:
 	mov ah, 01h ;second input
 	int 21h
 	call CalcAddBase16Load0NumErrorInput ;CHECKER NG 2ND INPUT
-
 	mov ah, 02h
 	mov dl, 2Eh ; dot
 	int 21h
@@ -2934,16 +2822,13 @@ eleven:
 twelve:
 	mov ah,bl
 	push ax
-	;insert computation process here	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcAddBase16SubMenuSum
-	int 21h	
-	;put the answer here	
-	 ;process
-	mov bx,0000h
+	int 21h			 
+	mov bx,0000h ;process
 	mov cx,0000h
 	mov dx,0000h
     pop bx
@@ -3178,8 +3063,7 @@ calcAddBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	call CalcAddBase2LoadNumChecker
 	sub al,30h
 	mov bl,al
-	;second input
-	mov ah,02h	
+	mov ah,02h	 	;second input
 	mov dx,0B14h
 	int 10h	
 	mov ah, 09h
@@ -3209,15 +3093,13 @@ calcAddBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	call CalcAddBase2LoadNumChecker
 	sub al,30h
 	mov ah,bl
-	push ax
-	;insert computation process here	
+	push ax		
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcAddBase2SubMenuSum
 	int 21h		
-	;put the answer here
 ;PROCESS ADDITION BASE2
 	mov bx,0000h
 	mov cx,0000h
@@ -3446,7 +3328,7 @@ CalcSubtBaseLoadCalcMenu:
 	jmp calcScreenMenu
 CalcSubtBaseLoadErrorInput:
 	jmp errorCalcSubtSubMenuInput
-calcSubtSubMenuH1cntr : ;calc mul base menu 
+calcSubtSubMenuH1cntr : 
 	mov ah,02h		
 	mov dx,071Eh
 	int 10h
@@ -3509,8 +3391,7 @@ calcSubtBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
-	push ax
-	;insert computation process here
+	push ax	
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -3534,47 +3415,39 @@ calcSubtBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
-	push ax
-	;insert computation process here	
+	push ax		
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcSubtBase5SubMenuDiff
 	int 21h		
-	;put the answer here
 	pop dx
     mov cl, dl
     pop dx
     mov bl, dl
     pop dx
-    mov bh, dl
-        
+    mov bh, dl        
     mov ch, 04h
     mov al, 04h
     mov ah, 04h
     
 	sub cl, 30h
 	sub bl, 30h
-	sub bh, 30h
-	
+	sub bh, 30h	
     sub ch, cl
     sub al, bl
-    sub ah, bh
-	
+    sub ah, bh	
 	pop dx
     mov cl, dl
     pop dx
     mov bl, dl
     pop dx
-    mov bh, dl
-	
+    mov bh, dl	
 	sub cl, 30h
 	sub bl, 30h
-	sub bh, 30h
-	
-	add	ch, cl
-	
+	sub bh, 30h	
+	add	ch, cl	
     cmp ch, 05h
     jb SubB51
     sub ch, 05h
@@ -3595,21 +3468,16 @@ SubB52:
 SubB53: 
 	cmp bh, 00h
 	ja PositiveB5
-
     mov dh, ah
 	mov bl, al
-
     mov cl, 04h
     mov bl, 04h
-    mov bh, 04h
-	
+    mov bh, 04h	
 	sub cl, ch
 	sub bl, al
 	sub bh, ah
-
 	add bx, 3030h
-	add cl, 30h
-	
+	add cl, 30h	
 	cmp bx, 3030h 
 	je checkCl
 	jmp NegativeB5
@@ -3782,8 +3650,7 @@ calcSubtBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng cal
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
-	push ax
-	;insert computation process here	
+	push ax		
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -3807,15 +3674,13 @@ calcSubtBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng cal
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
-	push ax
-	;insert computation process here
+	push ax	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcSubtBase16SubMenuDiff
 	int 21h		
-	;put the answer here
 pop1:
 	pop dx		;46
     mov cl, dl  
@@ -3846,12 +3711,10 @@ pop3:
 r1:       
     mov ch,0Fh  ;f-f=0
     mov al,0Fh	;f-e=1
-    mov ah,0Fh	;f-f=0
-	
+    mov ah,0Fh	;f-f=0	
     sub ch, cl
     sub al, bl
     sub ah, bh
-
 pop4:	
 	pop dx		;46
     mov cl, dl
@@ -3878,9 +3741,7 @@ pop6:
 	sub bh,37h	;0f
 	jmp nextchecker
 	bhsub2:
-	sub bh,30h
-	
-	
+	sub bh,30h		
 nextchecker:	
 	add	ch, cl  ;0+F=F
 	
@@ -3906,35 +3767,33 @@ SubB163:
 	ja positiveb16
     mov dh, ah
 	mov bl, al
-
     mov cl, 0Fh
     mov bl, 0Fh
-    mov bh, 0Fh
-	
+    mov bh, 0Fh	
 	sub cl, ch
 	cmp cl,09h
 	jbe clsub3
 	add cl,37h
 	jmp a
-	clsub3:
+clsub3:
 	add cl,30h
-	a:
+a:
 	sub bl, al
 	cmp bl,09h
 	jbe blsub3
 	add bl,37h
 	jmp b
-	blsub3:
+blsub3:
 	add bl,30h
-	b:
+b:
 	sub bh, ah
 	cmp bh, 09h
 	jbe bhsub3
 	add bh,37h
 	jmp zerocheck
-	bhsub3:
+bhsub3:
 	add bh,30h
-	zerocheck:
+zerocheck:
 	cmp bx, 3030h 
 	je checkClb16
 	jmp negativeb16
@@ -3990,21 +3849,21 @@ positiveb16:
 	jmp nextcheckerb16sub
 	add37:
 	add bh,37h
-	nextcheckerb16sub:
+nextcheckerb16sub:
 	cmp bl, 09h
 	jg add372
 	add bl, 30h
 	jmp nextcheckerb16sub2
-	add372:
+add372:
 	add bl, 37h
-	nextcheckerb16sub2:
+nextcheckerb16sub2:
 	cmp ch,	09h
 	jg add373
 	add ch, 30h
 	jmp printingb16sub
-	add373:
+add373:
 	add ch, 37h
-	printingb16sub:
+printingb16sub:
 	mov ah, 02h
 	mov dl, 30h
 	int 21h
@@ -4130,8 +3989,7 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
-	push ax
-	;insert computation process here
+	push ax	
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -4156,8 +4014,7 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
-	push ax
-	;insert computation process here
+	push ax	
 	mov ah,02h	
 	mov dx,0D19h
 	int 10h
@@ -4167,40 +4024,32 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	jmp processing
 Input2Error2Subt:
 	jmp CalcSubtBase2LoadNumErrorInput2
-	;put the answer here
 processing:
 	pop dx
     mov cl, dl
     pop dx
     mov bl, dl
     pop dx
-    mov bh, dl
-        
+    mov bh, dl        
     mov ch, 01h
     mov al, 01h
-    mov ah, 01h
-    
+    mov ah, 01h    
 	sub cl, 30h
 	sub bl, 30h
-	sub bh, 30h
-	
+	sub bh, 30h	
     sub ch, cl
     sub al, bl
-    sub ah, bh
-	
+    sub ah, bh	
 	pop dx
     mov cl, dl
     pop dx
     mov bl, dl
     pop dx
-    mov bh, dl
-	
+    mov bh, dl	
 	sub cl, 30h
 	sub bl, 30h
-	sub bh, 30h
-	
-	add	ch, cl
-	
+	sub bh, 30h	
+	add	ch, cl	
     cmp ch, 02h
     jb SubB21
     sub ch, 02h
@@ -4221,21 +4070,16 @@ SubB22:
 SubB23: 
 	cmp bh, 00h
 	ja PositiveB2
-
     mov dh, ah
 	mov bl, al
-
     mov cl, 01h
     mov bl, 01h
     mov bh, 01h
-	
 	sub cl, ch
 	sub bl, al
 	sub bh, ah
-
 	add bx, 3030h
-	add cl, 30h
-	
+	add cl, 30h	
 	cmp bx, 3030h 
 	je checkClb2
 	jmp NegativeB2
@@ -4339,7 +4183,7 @@ CalcSubtBase2Load0NumErrorInput:
 	jmp CalcSubtBase2LoadNumErrorInput2
 CalcSubtBase2Load0NumRetInput:
 	ret
-calcSubtBase2SubMenuH1cntr : ;calc mul base menu 
+calcSubtBase2SubMenuH1cntr : 
 	mov ah,02h		
 	mov dx,071Eh
 	int 10h
@@ -4402,507 +4246,6 @@ errorCalcSubtBase2SubMenuNUMInput:
 	int 21h
 	jmp calcSubtBase
 calcSubtBase endp
-	;-------------- CALCULATOR MODULO --------------;
-calcModuloBase proc
-calcModuloBase:;Sub Menu after pumili sa Calculator Menu 	
-	call clrScreen
-	mov ah,02h		
-	mov dx,071Eh
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloSubMenuH1
-	int 21h
-	mov ah,02h	
-	mov dx,0824h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloSubMenuH2
-	int 21h
-	mov ah,02h	
-	mov dx,0A1Ah
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenu
-	int 21h
-	mov ah,02h	
-	mov dx,0B1Ah
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenu
-	int 21h
-	mov ah,02h	
-	mov dx,0C1Ah
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenu
-	int 21h
-	mov ah,02h	
-	mov dx,0D1Ah
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBackSubMenu
-	int 21h
-	mov ah,02h	
-	mov dx,0F1Ah
-	int 10h	
-	mov ah, 09h
-	lea dx, calcModuloInputSubMenu
-	int 21h	
-	mov ah, 01h
-	int 21h
-	cmp al, 31h
-	je CalcModuloBase5LoadCalcMenu
-	cmp al, 32h
-	je CalcModuloBase16LoadCalcMenu
-	cmp al, 33h
-	je CalcModuloBase2LoadCalcMenu
-	cmp al, 34h
-	je CalcModuloBaseLoadCalcMenu
-	cmp al, 30h
-	jle CalcModuloBaseLoadErrorInput
-	cmp al, 35h
-	jge CalcModuloBaseLoadErrorInput	
-CalcModuloBase5LoadCalcMenu:
-	jmp calcModuloBase5
-CalcModuloBase16LoadCalcMenu:
-	jmp calcModuloBase16
-CalcModuloBase2LoadCalcMenu:
-	jmp calcModuloBase2
-CalcModuloBaseLoadCalcMenu:
-	jmp calcScreenMenu
-CalcModuloBaseLoadErrorInput:
-	jmp errorCalcModuloSubMenuInput
-errorCalcModuloSubMenuInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase	
-calcModuloBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
-	call clrScreen
-	mov ah,02h		
-	mov dx,071Eh
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuH1
-	int 21h
-	mov ah,02h	
-	mov dx,0821h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuH2
-	int 21h
-	mov ah,02h	
-	mov dx,0A12h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuDivi1 ;Dividend
-	int 21h
-	mov ah, 01h ;1st input
-	int 21h
-	call CalcModuloBase5Load0NumErrorInput ;CHECKER NG 1ST INPUT
-	mov ah,02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	;insert computation process here	
-	mov ah,02h	
-	mov dx,0B14h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuDivi2 ;Divisor
-	int 21h
-	mov ah, 01h ;second input
-	int 21h
-	call CalcModuloBase5Load0NumErrorInput ;CHECKER NG 2ND INPUT
-	mov ah, 02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov cl, 03
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase5LoadNumChecker
-	;insert computation process here
-	mov ah,02h	
-	mov dx,0D19h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuQuo
-	int 21h		
-	;put the answer here
-	mov ah,02h	
-	mov dx,0f17h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase5SubMenuAgain ;use again
-	int 21h
-	MOV AH, 01H
-	int 21h
-	call CalcModuloBase5LoadYNChecker	
-CalcModuloBase5LoadModuloBaseMenu:
-	jmp calcModuloBase
-CalcModuloBase5LoadModuloBase5Menu:
-	jmp calcModuloBase5
-CalcModuloBase5LoadNumChecker:
-	cmp al, 30h
-	jl CalcModuloBase5LoadNumErrorInput2
-	cmp al, 34h
-	jg CalcModuloBase5LoadNumErrorInput2
-	ret
-CalcModuloBase5LoadYNChecker:
-	CMP AL, 59H ;big Y
-	JE CalcModuloBase5LoadModuloBase5Menu
-	CMP AL, 4EH ;big N
-	JE CalcModuloBase5LoadModuloBaseMenu
-	CMP AL, 59H ;not Y
-	JnE CalcModuloBase5LoadYNErrorInput
-	CMP AL, 4EH ;not N
-	JnE CalcModuloBase5LoadYNErrorInput
-	ret
-CalcModuloBase5LoadYNErrorInput:
-	jmp errorCalcModuloBase5SubMenuYNInput
-CalcModuloBase5LoadNumErrorInput2:
-	jmp errorCalcModuloBase5SubMenuNUMInput
-CalcModuloBase5Load0NumErrorInput:
-	cmp al, 30h
-	je CalcModuloBase5Load0NumRetInput
-	jmp CalcModuloBase5LoadNumErrorInput2
-CalcModuloBase5Load0NumRetInput:
-	ret
-errorCalcModuloBase5SubMenuYNInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase5
-errorCalcModuloBase5SubMenuNUMInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase
-calcModuloBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng calcu
-	call clrScreen
-	mov ah,02h		
-	mov dx,071Eh
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuH1
-	int 21h
-	mov ah,02h	
-	mov dx,0820h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuH2
-	int 21h
-	mov ah,02h	
-	mov dx,0A12h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuDivi1 ;Dividend
-	int 21h
-	mov ah, 01h ;1st input
-	int 21h
-	call CalcModuloBase16Load0NumErrorInput ;CHECKER NG 1ST INPUT
-	mov ah,02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	;insert computation process here	
-	mov ah,02h	
-	mov dx,0B14h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuDivi2 ;Divisor
-	int 21h
-	mov ah, 01h ;second input
-	int 21h
-	call CalcModuloBase16Load0NumErrorInput ;CHECKER NG 2ND INPUT
-	mov ah, 02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase16LoadLetterNumErrorInput
-	;insert computation process here
-	mov ah,02h	
-	mov dx,0D19h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuQuo
-	int 21h		
-	;put the answer here
-	mov ah,02h	
-	mov dx,0f17h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase16SubMenuAgain ;use again
-	int 21h
-	MOV AH, 01H
-	int 21h
-	call CalcModuloBase16LoadYNChecker
-CalcModuloBase16LoadModuloBaseMenu:
-	jmp calcModuloBase
-CalcModuloBase16LoadModuloBase16Menu:
-	jmp calcSubtBase16
-CalcModuloBase16LoadLetterNumErrorInput:
-	cmp al, 30h
-	jl CalcModuloBase16LoadNumErrorInput2
-	cmp al, 39h
-	jle CalcModuloBase16Load0NumRetInput
-	cmp al, 41h ;A
-	jl CalcModuloBase16LoadNumErrorInput2
-	cmp al, 46h ;F
-	jle CalcModuloBase16Load0NumRetInput
-	jmp CalcModuloBase16LoadNumErrorInput2
-CalcModuloBase16LoadYNChecker:
-	CMP AL, 59H ;big Y
-	JE CalcModuloBase16LoadModuloBase16Menu
-	CMP AL, 4EH ;big N
-	JE CalcModuloBase16LoadModuloBaseMenu
-	CMP AL, 59H ;not Y
-	JnE CalcModuloBase16LoadYNErrorInput
-	CMP AL, 4EH ;not N
-	JnE CalcModuloBase16LoadYNErrorInput
-	ret
-CalcModuloBase16LoadYNErrorInput:
-	jmp errorCalcModuloBase16SubMenuYNInput
-CalcModuloBase16LoadNumErrorInput2:
-	jmp errorCalcModuloBase16SubMenuNUMInput
-CalcModuloBase16Load0NumErrorInput:
-	cmp al, 30h
-	je CalcModuloBase16Load0NumRetInput
-	jmp CalcModuloBase16LoadNumErrorInput2
-CalcModuloBase16Load0NumRetInput:
-	ret
-errorCalcModuloBase16SubMenuYNInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase16
-errorCalcModuloBase16SubMenuNUMInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase
-calcModuloBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
-	call clrScreen	
-	mov ah,02h		
-	mov dx,071Eh
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuH1
-	int 21h	
-	mov ah,02h	
-	mov dx,0821h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuH2
-	int 21h
-	mov ah,02h	
-	mov dx,0A12h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuDivi1 ;Dividend
-	int 21h
-	mov ah, 01h ;1st input
-	int 21h
-	call CalcModuloBase2Load0NumErrorInput ;CHECKER NG 1ST INPUT
-	mov ah,02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	;insert computation process here
-	mov ah,02h	
-	mov dx,0B14h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuDivi2 ;Divisor
-	int 21h
-	mov ah, 01h ;second input
-	int 21h
-	cmp al, 30h
-	JnE CalcModuloBase2LoadNumErrorInput2
-	mov ah, 02h
-	mov dl, 2Eh ; dot
-	int 21h
-	mov ah, 01h ;1st decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcModuloBase2LoadNumChecker
-	;insert computation process here
-	mov ah,02h	
-	mov dx,0D19h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuQuo
-	int 21h	
-	;put the answer here	
-	mov ah,02h	
-	mov dx,0f17h
-	int 10h
-	mov ah, 09h
-	lea dx, calcModuloBase2SubMenuAgain ;use again
-	int 21h
-	MOV AH, 01H
-	int 21h
-	call CalcModuloBase2LoadYNChecker	
-CalcModuloBase2LoadModuloBaseMenu:
-	jmp calcModuloBase
-CalcModuloBase2LoadModuloBase2Menu:
-	jmp calcModuloBase2
-CalcModuloBase2LoadNumChecker:
-	cmp al, 30h
-	jl CalcModuloBase2LoadNumErrorInput2
-	cmp al, 31h
-	jg CalcModuloBase2LoadNumErrorInput2
-	ret
-CalcModuloBase2LoadYNChecker:
-	CMP AL, 59H ;big Y
-	JE CalcModuloBase2LoadModuloBase2Menu
-	CMP AL, 4EH ;big N
-	JE CalcModuloBase2LoadModuloBaseMenu
-	CMP AL, 59H ;not Y
-	JnE CalcModuloBase2LoadYNErrorInput
-	CMP AL, 4EH ;not N
-	JnE CalcModuloBase2LoadYNErrorInput
-	ret
-CalcModuloBase2LoadYNErrorInput:
-	jmp errorCalcModuloBase2SubMenuYNInput
-CalcModuloBase2LoadNumErrorInput2:
-	jmp errorCalcModuloBase2SubMenuNUMInput
-CalcModuloBase2Load0NumErrorInput:
-	cmp al, 30h
-	je CalcModuloBase2Load0NumRetInput
-	jmp CalcModuloBase2LoadNumErrorInput2
-CalcModuloBase2Load0NumRetInput:
-	ret
-errorCalcModuloBase2SubMenuYNInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase2
-errorCalcModuloBase2SubMenuNUMInput: 
-	mov ah,02h	
-	mov dx,111fh
-	int 10h
-	mov ah, 09h
-	lea dx, errorMsg
-	int 21h	
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	mov ah, 09h
-	lea dx, errorKey
-	int 21h
-	mov ah, 01h
-	int 21h
-	jmp calcModuloBase
-calcModuloBase endp
 Calculator endp
 	;-------------- CONVERSION --------------;
 Conversion proc
@@ -4913,34 +4256,27 @@ convScreenMenu: ;start ng CONV menu
 	call convMenucntr
 	mov ah, 09h
 	lea dx, convMenu
-	int 21h
-	
+	int 21h	
 	call convBase7Menucntr
 	mov ah, 09h
 	lea dx, convBase7Menu
-	int 21h
-	
+	int 21h	
 	call convBase5Menucntr
 	mov ah, 09h
 	lea dx, convBase5Menu
-	int 21h
-	
+	int 21h	
 	call convBase2Menucntr
 	mov ah, 09h
 	lea dx, convBase2Menu
-	int 21h
-	
+	int 21h	
 	call convBackSubMenucntr
 	mov ah, 09h
 	lea dx, convBackSubMenu
-	int 21h
-	
+	int 21h	
 	call convMenuInputcntr
 	mov ah, 09h
 	lea dx, convMenuInput
 	int 21h
-
-
 	mov ah, 01h
 	int 21h
 	cmp al, 31h
@@ -4951,63 +4287,52 @@ convScreenMenu: ;start ng CONV menu
 	je convLoadBase2
 	cmp al, 34h
 	je convLoadHomeScreen
-
 	cmp al, 30h
 	jle convLoadErrorInput
 	cmp al, 35h
 	jge convLoadErrorInput
-	
-	convLoadBase7:
-		jmp convBase7SubMenuScreen
-	convLoadBase5:
-		JMP convBase5SubMenuScreen
-	convLoadBase2:
-		JMP convBase2SubMenuScreen
-	convLoadHomeScreen:
-		JMP HomeScreenMenu
-	convLoadErrorInput:
-		JMP errorconvMenuInput
-
-convMenucntr : ;calc menu 
-	mov ah,02h	
-	
+convLoadBase7:
+	jmp convBase7SubMenuScreen
+convLoadBase5:
+	JMP convBase5SubMenuScreen
+convLoadBase2:
+	JMP convBase2SubMenuScreen
+convLoadHomeScreen:
+	JMP HomeScreenMenu
+convLoadErrorInput:
+	JMP errorconvMenuInput
+convMenucntr :  
+	mov ah,02h		
 	mov dx,071Eh
 	int 10h
-	ret
-	
+	ret	
 convBase7Menucntr :
 	mov ah,02h	
 	mov dx,091Ah
 	int 10h
-	ret
-	
+	ret	
 convBase5Menucntr :
 	mov ah,02h	
 	mov dx,0A1Ah
 	int 10h
-	ret
-	
+	ret	
 convBase2Menucntr :
 	mov ah,02h	
 	mov dx,0B1Ah
 	int 10h
-	ret
-	
+	ret	
 convBackSubMenucntr :
 	mov ah,02h	
 	mov dx,0C1Ah
 	int 10h
-	ret
-	
+	ret	
 convMenuInputcntr :
 	mov ah,02h	
 	mov dx,0E1Ah
 	int 10h
-	ret
-		
+	ret		
 errorconvMenuInputcntr : ;start ng center alignment ng error messages
-	mov ah,02h	
-	
+	mov ah,02h		
 	mov dx,111fh
 	int 10h
 	ret
@@ -5032,86 +4357,68 @@ convScreenMenu endp
 	;-------------- CONVERSION BASE 7 MENU --------------;
 convBase7SubMenuScreen proc
 convBase7SubMenuScreen: ;start ng CONV menu
-	call clrScreen
-	
+	call clrScreen	
 	call convBase7SubMenuH1cntr
 	mov ah, 09h
 	lea dx, convBase7SubMenuH1 ; Conversion
-	int 21h
-	
+	int 21h	
 	call convBase7SubMenuH2cntr
 	mov ah, 09h
 	lea dx, convBase7SubMenuH2 ;Base 7
-	int 21h
-	
+	int 21h	
 	call convBase7to4SubMenucntr
 	mov ah, 09h
 	lea dx, convBase7to4SubMenu ; base 7 to 4
-	int 21h
-	
+	int 21h	
 	call convBase7BackSubMenucntr
 	mov ah, 09h
 	lea dx, convBase7BackSubMenu ; back to conversion menu
-	int 21h
-	
+	int 21h	
 	call convBase7InputSubMenucntr
 	mov ah, 09h
 	lea dx, convBase7InputSubMenu ;Enter your choice
-	int 21h
-
-	
+	int 21h	
 	mov ah, 01h
 	int 21h
 	cmp al, 31h
 	je convBase7LoadBase7to4
 	cmp al, 32h
 	je convBase7LoadconvScreen
-
 	cmp al, 30h
 	jle convBase7LoadErrorInput
-	cmp al, 35h
+	cmp al, 33h
 	jge convBase7LoadErrorInput
-	
-
-	convBase7LoadBase7to4:
-		jmp convBase7to4SubMenuScreen
-	convBase7LoadconvScreen:
-		jmp convScreenMenu
-	convBase7LoadErrorInput:
-		jmp errorconvBase7Input
-
-convBase7SubMenuH1cntr : ;calc menu 
-	mov ah,02h
-		
+convBase7LoadBase7to4:
+	jmp convBase7to4SubMenuScreen
+convBase7LoadconvScreen:
+	jmp convScreenMenu
+convBase7LoadErrorInput:
+	jmp errorconvBase7Input
+convBase7SubMenuH1cntr :  
+	mov ah,02h		
 	mov dx,071Eh
 	int 10h
 	ret
-	
 convBase7SubMenuH2cntr :
 	mov ah,02h	
 	mov dx,0824h
 	int 10h
 	ret
-	
 convBase7to4SubMenucntr :
 	mov ah,02h	
 	mov dx,0A1Ah
 	int 10h
 	ret
-	
 convBase7BackSubMenucntr :
 	mov ah,02h	
 	mov dx,0B1Ah
 	int 10h
 	ret
-	
 convBase7InputSubMenucntr :
 	mov ah,02h	
-	mov dx,0C1Ah
+	mov dx,0D1Ah
 	int 10h
 	ret
-	
-	
 errorconvBase7Inputcntr : ;start ng center alignment ng error messages
 	mov ah,02h	
 	mov dx,111fh
@@ -5134,21 +4441,17 @@ errorconvBase7Input:
 	mov ah, 01h
 	int 21h
 	jmp convScreenMenu
-	
 convBase7to4SubMenuScreen proc
 convBase7to4SubMenuScreen:;BASE 7 Sub Menu after pumili ng base sa CONVERSION submenu 
 	call clrScreen
-	
 	call convBase7to4SubMenuH1cntr
 	mov ah, 09h
 	lea dx, convBase7to4SubMenuH1
 	int 21h
-	
 	call convBase7to4SubMenuH2cntr
 	mov ah, 09h
 	lea dx, convBase7to4SubMenuH2
-	int 21h
-	
+	int 21h	
 	call convBase7to4InputSubMenucntr 
 	mov ah, 09h
 	lea dx, convBase7to4InputSubMenu ;Addend
@@ -5156,38 +4459,30 @@ convBase7to4SubMenuScreen:;BASE 7 Sub Menu after pumili ng base sa CONVERSION su
 	mov ah, 01h ;1st input
 	int 21h
 	call convBase7to4Load0NumErrorInput ;CHECKER NG 1ST INPUT
-
-	
 	mov ah,02h
 	mov dl, 2Eh ; dot
 	int 21h
-	
-
 convBase7to4Input:	
 	mov ah, 01h
 	int 21h
 	call convBase7to4LoadNumChecker
 	sub al,30h
 	mov cl,al
-
 	mov ah, 01h
 	int 21h
 	call convBase7to4LoadNumChecker
 	sub al,30h
-	mov ch,al
-	
+	mov ch,al	
 	mov ah, 01h
 	int 21h
 	call convBase7to4LoadNumChecker
 	sub al,30h
-	mov bl,al
-	
+	mov bl,al	
 	call convBase7to4OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase7to4OutputSubMenu
 	int 21h		
-	;process
-	mov dx,0000h
+	mov dx,0000h 	;process
 	mov al,cl
 	mov cl,31h
 	mul cl
@@ -5199,8 +4494,7 @@ convBase7to4Input:
 	mov al,bl
 	mov bl,01h
 	mul bl
-	add dx,ax
-	
+	add dx,ax	
 	mov bx,0004h
 	mov ax,dx
 	xor dx,dx
@@ -5218,8 +4512,6 @@ convBase7to4Input:
 	xor dx,dx
 	div bx
 	push dx
-	
-
 printb7tob4:
 	mov ah,02h
 	mov dl,30h
@@ -5240,9 +4532,7 @@ printb7tob4:
 	int 21h
 	pop dx
 	add dl,30h
-	int 21h
-	
-	
+	int 21h	
 ReuseConversionB7toB4:
 	mov bh,00h
 	call convBase7to4SubMenuAgaincntr
@@ -5251,41 +4541,40 @@ ReuseConversionB7toB4:
 	int 21h
 	MOV AH, 01H
 	int 21h
-	call convBase7to4LoadYNChecker
-	
-	convBase7to4LoadBase7Menu:
-		jmp convBase7SubMenuScreen
-	convBase7to4LoadBase7to4Menu:
-		jmp convBase7to4SubMenuScreen
-	convBase7to4LoadNumChecker:
-		cmp al, 30h
-		jl convBase7to4LoadNumErrorInput
-		cmp al, 36h
-		jg convBase7to4LoadNumErrorInput
-		ret
-	convBase7to4LoadYNChecker:
-		CMP AL, 59H ;big Y
-		JE convBase7to4LoadBase7to4Menu
-		CMP AL, 4EH ;big N
-		JE convBase7to4LoadBase7Menu
-		CMP AL, 59H ;not Y
-		JnE convBase7to4LoadYNErrorInput
-		CMP AL, 4EH ;not N
-		JnE convBase7to4LoadYNErrorInput
-		ret
-	convBase7to4LoadYNErrorInput:
-		jmp errorconvBase7to4SubMenuYNInput
-	convBase7to4LoadNumErrorInput:
-		jmp errorconvBase7to4SubMenuNUMInput
-	convBase7to4Load0NumErrorInput:
-		cmp al, 30h
-		je convBase7to4Load0NumRetInput
-		jmp convBase7to4LoadNumErrorInput
-	convBase7to4Load0NumRetInput:
-		ret	
-convBase7to4SubMenuH1cntr : ;calc mul base menu 
+	call convBase7to4LoadYNChecker	
+convBase7to4LoadBase7Menu:
+	jmp convBase7SubMenuScreen
+convBase7to4LoadBase7to4Menu:
+	jmp convBase7to4SubMenuScreen
+convBase7to4LoadNumChecker:
+	cmp al, 30h
+	jl convBase7to4LoadNumErrorInput
+	cmp al, 36h
+	jg convBase7to4LoadNumErrorInput
+	ret
+convBase7to4LoadYNChecker:
+	CMP AL, 59H ;big Y
+	JE convBase7to4LoadBase7to4Menu
+	CMP AL, 4EH ;big N
+	JE convBase7to4LoadBase7Menu
+	CMP AL, 59H ;not Y
+	JnE convBase7to4LoadYNErrorInput
+	CMP AL, 4EH ;not N
+	JnE convBase7to4LoadYNErrorInput
+	ret
+convBase7to4LoadYNErrorInput:
+	jmp errorconvBase7to4SubMenuYNInput
+convBase7to4LoadNumErrorInput:
+	jmp errorconvBase7to4SubMenuNUMInput
+convBase7to4Load0NumErrorInput:
+	cmp al, 30h
+	je convBase7to4Load0NumRetInput
+	jmp convBase7to4LoadNumErrorInput
+convBase7to4Load0NumRetInput:
+	ret	
+convBase7to4SubMenuH1cntr : 
 	mov ah,02h		
-	mov dx,071Eh
+	mov dx,0722h
 	int 10h
 	ret
 convBase7to4SubMenuH2cntr :
@@ -5376,46 +4665,39 @@ convBase5SubMenuScreen: ;start ng CONV menu
 	je convBase5LoadconvScreen
 	cmp al, 30h
 	jle convBase5LoadErrorInput
-	cmp al, 35h
+	cmp al, 33h
 	jge convBase5LoadErrorInput
-	convBase5LoadBase5to10:
-		jmp convBase5to10SubMenuScreen
-	convBase5LoadconvScreen:
-		jmp convScreenMenu
-	convBase5LoadErrorInput:
-		jmp errorconvBase5Input
-
-convBase5SubMenuH1cntr : ;calc menu 
+convBase5LoadBase5to10:
+	jmp convBase5to10SubMenuScreen
+convBase5LoadconvScreen:
+	jmp convScreenMenu
+convBase5LoadErrorInput:
+	jmp errorconvBase5Input
+convBase5SubMenuH1cntr :  
 	mov ah,02h		
 	mov dx,071Eh
 	int 10h
 	ret
-	
 convBase5SubMenuH2cntr :
 	mov ah,02h	
 	mov dx,0824h
 	int 10h
 	ret
-	
 convBase5to10SubMenucntr :
 	mov ah,02h	
 	mov dx,0A1Ah
 	int 10h
 	ret
-	
 convBase5BackSubMenucntr :
 	mov ah,02h	
 	mov dx,0B1Ah
 	int 10h
-	ret
-	
+	ret	
 convBase5InputSubMenucntr :
 	mov ah,02h	
-	mov dx,0C1Ah
+	mov dx,0D1Ah
 	int 10h
 	ret
-	
-	
 errorconvBase5Inputcntr : ;start ng center alignment ng error messages
 	mov ah,02h	
 	mov dx,111fh
@@ -5437,8 +4719,7 @@ errorconvBase5Input:
 	int 21h
 	mov ah, 01h
 	int 21h
-	jmp convScreenMenu
-	
+	jmp convScreenMenu	
 convBase5to10SubMenuScreen proc
 convBase5to10SubMenuScreen:;BASE 5 Sub Menu after pumili ng base sa CONVERSION submenu 
 	call clrScreen	
@@ -5457,38 +4738,30 @@ convBase5to10SubMenuScreen:;BASE 5 Sub Menu after pumili ng base sa CONVERSION s
 	mov ah, 01h ;1st input
 	int 21h
 	call convBase5to10Load0NumErrorInput ;CHECKER NG 1ST INPUT
-	
 	mov ah,02h
 	mov dl, 2Eh ; dot
-	int 21h
-	
-	
-convBase5to10Input:
-		;input1
-	mov ah, 01h
+	int 21h	
+convBase5to10Input:	
+	mov ah, 01h ;input1
 	int 21h
 	call convBase5to10LoadNumChecker
 	sub al,30h
-	mov cl,al
-		;input2
-	mov ah, 01h
+	mov cl,al	
+	mov ah, 01h ;input2
 	int 21h
 	call convBase5to10LoadNumChecker
 	sub al,30h
-	mov ch,al
-		;input3
-	mov ah, 01h
+	mov ch,al	
+	mov ah, 01h ;input3
 	int 21h
 	call convBase5to10LoadNumChecker
 	sub al,30h
-	mov bl,al
-	
+	mov bl,al	
 	call convBase5to10OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase5to10OutputSubMenu
 	int 21h		
-	;process
-	mov dx,0000h
+	mov dx,0000h 	;process
 	mov al,cl
 	mov cl,19h
 	mul cl
@@ -5500,8 +4773,7 @@ convBase5to10Input:
 	mov al,bl
 	mov bl,01h
 	mul bl
-	add dl,al
-	
+	add dl,al	
 	mov bx,000Ah
 	mov ax,dx
 	xor dx,dx
@@ -5513,8 +4785,7 @@ convBase5to10Input:
 	xor dx,dx
 	div bx
 	push dx
-	xor dx,dx
-	
+	xor dx,dx	
 printb5tob10:
 	mov ah,02h
 	mov dl,30h
@@ -5529,9 +4800,7 @@ printb5tob10:
 	int 21h
 	pop dx
 	add dl,30h
-	int 21h
-
-	
+	int 21h	
 ReuseConversionB5toB10:	
 	mov bh,00h
 	call convBase5to10SubMenuAgaincntr
@@ -5540,43 +4809,40 @@ ReuseConversionB5toB10:
 	int 21h
 	MOV AH, 01H
 	int 21h
-	call convBase5to10LoadYNChecker
-	
-	convBase5to10LoadBase5Menu:
-		jmp convBase5SubMenuScreen
-	convBase5to10LoadBase5to10Menu:
-		jmp convBase5to10SubMenuScreen
-	convBase5to10LoadNumChecker: ;Checker if input is less than 0 or greater than 4 
-		cmp al, 30h
-		jl convBase5to10LoadNumErrorInput
-		cmp al, 34h
-		jg convBase5to10LoadNumErrorInput
-		ret
-	convBase5to10LoadYNChecker:
-		CMP AL, 59H ;big Y
-		JE convBase5to10LoadBase5to10Menu
-		CMP AL, 4EH ;big N
-		JE convBase5to10LoadBase5Menu
-		CMP AL, 59H ;not Y
-		JnE convBase5to10LoadYNErrorInput
-		CMP AL, 4EH ;not N
-		JnE convBase5to10LoadYNErrorInput
-		ret
-	convBase5to10LoadYNErrorInput:
-		jmp errorconvBase5to10SubMenuYNInput
-	convBase5to10LoadNumErrorInput:
-		jmp errorconvBase5to10SubMenuNUMInput
-	convBase5to10Load0NumErrorInput:
-		cmp al, 30h
-		je convBase5to10Load0NumRetInput
-		jmp convBase5to10LoadNumErrorInput
-	convBase5to10Load0NumRetInput:
-		ret
-	
-convBase5to10SubMenuH1cntr : ;calc mul base menu 
-	mov ah,02h
-		
-	mov dx,071Eh
+	call convBase5to10LoadYNChecker	
+convBase5to10LoadBase5Menu:
+	jmp convBase5SubMenuScreen
+convBase5to10LoadBase5to10Menu:
+	jmp convBase5to10SubMenuScreen
+convBase5to10LoadNumChecker: ;Checker if input is less than 0 or greater than 4 
+	cmp al, 30h
+	jl convBase5to10LoadNumErrorInput
+	cmp al, 34h
+	jg convBase5to10LoadNumErrorInput
+	ret
+convBase5to10LoadYNChecker:
+	CMP AL, 59H ;big Y
+	JE convBase5to10LoadBase5to10Menu
+	CMP AL, 4EH ;big N
+	JE convBase5to10LoadBase5Menu
+	CMP AL, 59H ;not Y
+	JnE convBase5to10LoadYNErrorInput
+	CMP AL, 4EH ;not N
+	JnE convBase5to10LoadYNErrorInput
+	ret
+convBase5to10LoadYNErrorInput:
+	jmp errorconvBase5to10SubMenuYNInput
+convBase5to10LoadNumErrorInput:
+	jmp errorconvBase5to10SubMenuNUMInput
+convBase5to10Load0NumErrorInput:
+	cmp al, 30h
+	je convBase5to10Load0NumRetInput
+	jmp convBase5to10LoadNumErrorInput
+convBase5to10Load0NumRetInput:
+	ret	
+convBase5to10SubMenuH1cntr : 
+	mov ah,02h		
+	mov dx,0722h
 	int 10h
 	ret
 convBase5to10SubMenuH2cntr :
@@ -5599,7 +4865,6 @@ convBase5to10SubMenuAgaincntr :
 	mov dx,0D19h
 	int 10h
 	ret
-
 errorconvBase5to10SubMenucntr : ;start ng center alignment ng error messages
 	mov ah,02h	
 	mov dx,111fh
@@ -5622,7 +4887,6 @@ errorconvBase5to10SubMenuYNInput:
 	mov ah, 01h
 	int 21h
 	jmp convBase5SubMenuScreen
-
 errorconvBase5to10SubMenuNUMInput: 
 	call errorconvBase5to10SubMenucntr
 	mov ah, 09h
@@ -5635,92 +4899,73 @@ errorconvBase5to10SubMenuNUMInput:
 	mov ah, 01h
 	int 21h
 	jmp convBase5SubMenuScreen
-convBase5to10SubMenuScreen endp
-		
+convBase5to10SubMenuScreen endp		
 convBase5SubMenuScreen endp		
 	;-------------- CONVERSION BASE 2 MENU --------------;
 convBase2SubMenuScreen proc
 convBase2SubMenuScreen: ;start ng CONV menu
-	call clrScreen
-	
+	call clrScreen	
 	call convBase2SubMenuH1cntr
 	mov ah, 09h
 	lea dx, convBase2SubMenuH1 ; Conversion
-	int 21h
-	
+	int 21h	
 	call convBase2SubMenuH2cntr
 	mov ah, 09h
 	lea dx, convBase2SubMenuH2 ;Base 2
-	int 21h
-	
+	int 21h	
 	call convBase2to8SubMenucntr
 	mov ah, 09h
 	lea dx, convBase2to8SubMenu ; base 2 to 10
-	int 21h
-	
+	int 21h	
 	call convBase2BackSubMenucntr
 	mov ah, 09h
 	lea dx, convBase2BackSubMenu ; back to conversion menu
-	int 21h
-	
+	int 21h	
 	call convBase2InputSubMenucntr
 	mov ah, 09h
 	lea dx, convBase2InputSubMenu ;Enter your choice
-	int 21h
-
-	
+	int 21h	
 	mov ah, 01h
 	int 21h
 	cmp al, 31h
 	je convBase2LoadBase2to8
 	cmp al, 32h
 	je convBase2LoadconvScreen
-
 	cmp al, 30h
 	jle convBase2LoadErrorInput
-	cmp al, 35h
+	cmp al, 33h
 	jge convBase2LoadErrorInput
-	
-
-	convBase2LoadBase2to8:
-		jmp convBase2to8SubMenuScreen
-	convBase2LoadconvScreen:
-		jmp convScreenMenu
-	convBase2LoadErrorInput:
-		jmp errorconvBase5Input
-
-convBase2SubMenuH1cntr : ;calc menu 
-	mov ah,02h
-		
+convBase2LoadBase2to8:
+	jmp convBase2to8SubMenuScreen
+convBase2LoadconvScreen:
+	jmp convScreenMenu
+convBase2LoadErrorInput:
+	jmp errorconvBase5Input
+convBase2SubMenuH1cntr :  
+	mov ah,02h		
 	mov dx,071Eh
 	int 10h
-	ret
-	
+	ret	
 convBase2SubMenuH2cntr :
 	mov ah,02h	
 	mov dx,0824h
 	int 10h
-	ret
-	
+	ret	
 convBase2to8SubMenucntr :
 	mov ah,02h	
 	mov dx,0A1Ah
 	int 10h
-	ret
-	
+	ret	
 convBase2BackSubMenucntr :
 	mov ah,02h	
 	mov dx,0B1Ah
 	int 10h
-	ret
-	
+	ret	
 convBase2InputSubMenucntr :
 	mov ah,02h	
-	mov dx,0C1Ah
+	mov dx,0D1Ah
 	int 10h
 	ret
-	
-	
 errorconvBase2Inputcntr : ;start ng center alignment ng error messages
 	mov ah,02h	
 	mov dx,111fh
@@ -5743,34 +4988,27 @@ errorconvBase2Input:
 	mov ah, 01h
 	int 21h
 	jmp convScreenMenu
-	
 convBase2to8SubMenuScreen proc
 convBase2to8SubMenuScreen:;BASE 2 Sub Menu after pumili ng base sa CONVERSION submenu 
 	call clrScreen
-	
 	call convBase2to8SubMenuH1cntr
 	mov ah, 09h
 	lea dx, convBase2to8SubMenuH1
-	int 21h
-	
+	int 21h	
 	call convBase2to8SubMenuH2cntr
 	mov ah, 09h
 	lea dx, convBase2to8SubMenuH2
-	int 21h
-	
+	int 21h	
 	call convBase2to8InputSubMenucntr 
 	mov ah, 09h
 	lea dx, convBase2to8InputSubMenu ;Addend
 	int 21h
 	mov ah, 01h ;1st input
 	int 21h
-	call convBase2to8Load0NumErrorInput ;CHECKER NG 1ST INPUT
-
-	
+	call convBase2to8Load0NumErrorInput ;CHECKER NG 1ST INPUT	
 	mov ah,02h
 	mov dl, 2Eh ; dot
-	int 21h
-	
+	int 21h	
 	mov dx,0000h
 	mov cl, 03h
 convBase2to8Input:	
@@ -5781,13 +5019,11 @@ convBase2to8Input:
 	sub al,30h
 	add dl,al
 	loop convBase2to8Input
-	push dx
-	
+	push dx	
 	call convBase2to8OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase2to8OutputSubMenu
-	int 21h		
-	
+	int 21h			
 	pop cx
 	cmp cx,0111h
 	je b8_7
@@ -5848,42 +5084,39 @@ ReuseConversionB2toB8:
 	MOV AH, 01H
 	int 21h
 	call convBase2to8LoadYNChecker
-	
-	convBase2to8LoadBase2Menu:
-		jmp convBase2SubMenuScreen
-	convBase2to8LoadBase2to8Menu:
-		jmp convBase2to8SubMenuScreen
-	convBase2to8LoadNumChecker: ;Checker if input is 0 or 1 
-		cmp al, 30h
-		jl convBase2to8LoadNumErrorInput
-		cmp al, 31h
-		jg convBase2to8LoadNumErrorInput
-		ret
-	convBase2to8LoadYNChecker:
-		CMP AL, 59H ;big Y
-		JE convBase2to8LoadBase2to8Menu
-		CMP AL, 4EH ;big N
-		JE convBase2to8LoadBase2Menu
-		CMP AL, 59H ;not Y
-		JnE convBase2to8LoadYNErrorInput
-		CMP AL, 4EH ;not N
-		JnE convBase2to8LoadYNErrorInput
-		ret
-	convBase2to8LoadYNErrorInput:
-		jmp errorconvBase2to8SubMenuYNInput
-	convBase2to8LoadNumErrorInput:
-		jmp errorconvBase2to8SubMenuNUMInput
-	convBase2to8Load0NumErrorInput:
-		cmp al, 30h
-		je convBase2to8Load0NumRetInput
-		jmp convBase2to8LoadNumErrorInput
-	convBase2to8Load0NumRetInput:
-		ret
-	
-convBase2to8SubMenuH1cntr : ;calc mul base menu 
-	mov ah,02h
-		
-	mov dx,071Eh
+convBase2to8LoadBase2Menu:
+	jmp convBase2SubMenuScreen
+convBase2to8LoadBase2to8Menu:
+	jmp convBase2to8SubMenuScreen
+convBase2to8LoadNumChecker: ;Checker if input is 0 or 1 
+	cmp al, 30h
+	jl convBase2to8LoadNumErrorInput
+	cmp al, 31h
+	jg convBase2to8LoadNumErrorInput
+	ret
+convBase2to8LoadYNChecker:
+	CMP AL, 59H ;big Y
+	JE convBase2to8LoadBase2to8Menu
+	CMP AL, 4EH ;big N
+	JE convBase2to8LoadBase2Menu
+	CMP AL, 59H ;not Y
+	JnE convBase2to8LoadYNErrorInput
+	CMP AL, 4EH ;not N
+	JnE convBase2to8LoadYNErrorInput
+	ret
+convBase2to8LoadYNErrorInput:
+	jmp errorconvBase2to8SubMenuYNInput
+convBase2to8LoadNumErrorInput:
+	jmp errorconvBase2to8SubMenuNUMInput
+convBase2to8Load0NumErrorInput:
+	cmp al, 30h
+	je convBase2to8Load0NumRetInput
+	jmp convBase2to8LoadNumErrorInput
+convBase2to8Load0NumRetInput:
+	ret	
+convBase2to8SubMenuH1cntr : 
+	mov ah,02h	
+	mov dx,0722h
 	int 10h
 	ret
 convBase2to8SubMenuH2cntr :
@@ -5906,7 +5139,6 @@ convBase2to8SubMenuAgaincntr :
 	mov dx,0D19h
 	int 10h
 	ret
-
 errorconvBase2to8SubMenucntr : ;start ng center alignment ng error messages
 	mov ah,02h	
 	mov dx,111fh
@@ -5942,16 +5174,13 @@ errorconvBase2to8SubMenuNUMInput:
 	mov ah, 01h
 	int 21h
 	jmp convBase2SubMenuScreen
-convBase2to8SubMenuScreen endp
-		
+convBase2to8SubMenuScreen endp	
 convBase2SubMenuScreen endp		
-
 Conversion endp	
 	;--------------    EXIT   --------------;
 exit proc
 exitSwitch:
 	mov ah,02h
-	
 	mov dx,0f10h
 	int 10h
 	MOV AH, 09H
@@ -5969,8 +5198,7 @@ exitSwitch:
 	JnE ExitInvalidInput
 ExitYes:
 	call clrScreen
-	mov ah,02h
-	
+	mov ah,02h	
 	mov dx,0a15h
 	int 10h
 	mov ah, 09h
