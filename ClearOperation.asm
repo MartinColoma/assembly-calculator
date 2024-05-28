@@ -3819,37 +3819,43 @@ Conversion proc
 convScreenMenu proc
 convScreenMenu: ;start ng CONV menu
 	call clrScreen
-	call convMenucntr
+	mov ah,02h	
+	mov bh, 00
+	mov dx,071Eh
+	int 10h
 	mov ah, 09h
 	lea dx, convMenu
 	int 21h
-	
-	call convBase7Menucntr
+	mov ah,02h	
+	mov dx,091Ah
+	int 10h
 	mov ah, 09h
 	lea dx, convBase7Menu
 	int 21h
-	
-	call convBase5Menucntr
+	mov ah,02h	
+	mov dx,0A1Ah
+	int 10h
 	mov ah, 09h
 	lea dx, convBase5Menu
-	int 21h
-	
-	call convBase2Menucntr
+	int 21h	
+	mov ah,02h	
+	mov dx,0B1Ah
+	int 10h
 	mov ah, 09h
 	lea dx, convBase2Menu
 	int 21h
-	
-	call convBackSubMenucntr
+	mov ah,02h	
+	mov dx,0C1Ah
+	int 10h
 	mov ah, 09h
 	lea dx, convBackSubMenu
-	int 21h
-	
-	call convMenuInputcntr
+	int 21h	
+	mov ah,02h	
+	mov dx,0E1Ah
+	int 10h
 	mov ah, 09h
 	lea dx, convMenuInput
 	int 21h
-
-
 	mov ah, 01h
 	int 21h
 	cmp al, 31h
@@ -3860,77 +3866,30 @@ convScreenMenu: ;start ng CONV menu
 	je convLoadBase2
 	cmp al, 34h
 	je convLoadHomeScreen
-
 	cmp al, 30h
 	jle convLoadErrorInput
 	cmp al, 35h
-	jge convLoadErrorInput
-	
-	convLoadBase7:
-		jmp convBase7SubMenuScreen
-	convLoadBase5:
-		JMP convBase5SubMenuScreen
-	convLoadBase2:
-		JMP convBase2SubMenuScreen
-	convLoadHomeScreen:
-		JMP HomeScreenMenu
-	convLoadErrorInput:
-		JMP errorconvMenuInput
-
-convMenucntr : ;calc menu 
-	mov ah,02h	
-	
-	mov dx,071Eh
-	int 10h
-	ret
-	
-convBase7Menucntr :
-	mov ah,02h	
-	mov dx,091Ah
-	int 10h
-	ret
-	
-convBase5Menucntr :
-	mov ah,02h	
-	mov dx,0A1Ah
-	int 10h
-	ret
-	
-convBase2Menucntr :
-	mov ah,02h	
-	mov dx,0B1Ah
-	int 10h
-	ret
-	
-convBackSubMenucntr :
-	mov ah,02h	
-	mov dx,0C1Ah
-	int 10h
-	ret
-	
-convMenuInputcntr :
-	mov ah,02h	
-	mov dx,0E1Ah
-	int 10h
-	ret
-		
-errorconvMenuInputcntr : ;start ng center alignment ng error messages
-	mov ah,02h	
-	
+	jge convLoadErrorInput	
+convLoadBase7:
+    jmp convBase7SubMenuScreen
+convLoadBase5:
+    JMP convBase5SubMenuScreen
+convLoadBase2:
+    JMP convBase2SubMenuScreen
+convLoadHomeScreen:
+    JMP HomeScreenMenu
+convLoadErrorInput:
+    JMP errorconvMenuInput
+errorconvMenuInput: 
+	mov ah,02h
 	mov dx,111fh
 	int 10h
-	ret
-errorconvMenuInputcntr1 :
-	mov ah,02h	
-	mov dx,1218h
-	int 10h
-	ret
-errorconvMenuInput: 
-	call errorconvMenuInputcntr
 	mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
-	call errorconvMenuInputcntr1
+	mov ah,02h	
+	mov dx,1218h
+	int 10h
 	mov ah, 09h
 	lea dx, errorKey
 	int 21h
@@ -4047,8 +4006,10 @@ errorconvBase7Input:
 convBase7to4SubMenuScreen proc
 convBase7to4SubMenuScreen:;BASE 7 Sub Menu after pumili ng base sa CONVERSION submenu 
 	call clrScreen
-	
-	call convBase7to4SubMenuH1cntr
+	mov ah,02h		
+	mov bh,00h
+	mov dx,071Eh
+	int 10h
 	mov ah, 09h
 	lea dx, convBase7to4SubMenuH1
 	int 21h
@@ -4092,38 +4053,39 @@ convBase7to4Input:
 	int 21h
 	call convBase7to4LoadYNChecker
 	
-	convBase7to4LoadBase7Menu:
-		jmp convBase7SubMenuScreen
-	convBase7to4LoadBase7to4Menu:
-		jmp convBase7to4SubMenuScreen
-	convBase7to4LoadNumChecker:
-		cmp al, 30h
-		jl convBase7to4LoadNumErrorInput
-		cmp al, 36h
-		jg convBase7to4LoadNumErrorInput
-		ret
-	convBase7to4LoadYNChecker:
-		CMP AL, 59H ;big Y
-		JE convBase7to4LoadBase7to4Menu
-		CMP AL, 4EH ;big N
-		JE convBase7to4LoadBase7Menu
-		CMP AL, 59H ;not Y
-		JnE convBase7to4LoadYNErrorInput
-		CMP AL, 4EH ;not N
-		JnE convBase7to4LoadYNErrorInput
-		ret
-	convBase7to4LoadYNErrorInput:
-		jmp errorconvBase7to4SubMenuYNInput
-	convBase7to4LoadNumErrorInput:
-		jmp errorconvBase7to4SubMenuNUMInput
-	convBase7to4Load0NumErrorInput:
-		cmp al, 30h
-		je convBase7to4Load0NumRetInput
-		jmp convBase7to4LoadNumErrorInput
-	convBase7to4Load0NumRetInput:
-		ret	
+convBase7to4LoadBase7Menu:
+	jmp convBase7SubMenuScreen
+convBase7to4LoadBase7to4Menu:
+	jmp convBase7to4SubMenuScreen
+convBase7to4LoadNumChecker:
+	cmp al, 30h
+	jl convBase7to4LoadNumErrorInput
+	cmp al, 36h
+	jg convBase7to4LoadNumErrorInput
+	ret
+convBase7to4LoadYNChecker:
+	CMP AL, 59H ;big Y
+	JE convBase7to4LoadBase7to4Menu
+	CMP AL, 4EH ;big N
+	JE convBase7to4LoadBase7Menu
+	CMP AL, 59H ;not Y
+	JnE convBase7to4LoadYNErrorInput
+	CMP AL, 4EH ;not N
+	JnE convBase7to4LoadYNErrorInput
+	ret
+convBase7to4LoadYNErrorInput:
+	jmp errorconvBase7to4SubMenuYNInput
+convBase7to4LoadNumErrorInput:
+	jmp errorconvBase7to4SubMenuNUMInput
+convBase7to4Load0NumErrorInput:
+	cmp al, 30h
+	je convBase7to4Load0NumRetInput
+	jmp convBase7to4LoadNumErrorInput
+convBase7to4Load0NumRetInput:
+	ret	
 convBase7to4SubMenuH1cntr : ;calc mul base menu 
 	mov ah,02h		
+	mov bh,00h
 	mov dx,071Eh
 	int 10h
 	ret
@@ -4641,8 +4603,10 @@ errorconvBase2to8SubMenucntr1 :
 	int 10h
 	ret
 errorconvBase2to8SubMenuYNInput: 
-	call errorconvBase2to8SubMenucntr
-	mov ah, 09h
+	mov ah,02h	
+	mov dx,111fh
+	int 10h
+    mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	call errorconvBase2to8SubMenucntr1
@@ -4653,8 +4617,10 @@ errorconvBase2to8SubMenuYNInput:
 	int 21h
 	jmp convBase2SubMenuScreen
 errorconvBase2to8SubMenuNUMInput: 
-	call errorconvBase2to8SubMenucntr
-	mov ah, 09h
+	mov ah,02h	
+	mov dx,111fh
+	int 10h
+    mov ah, 09h
 	lea dx, errorMsg
 	int 21h	
 	call errorconvBase2to8SubMenucntr1
