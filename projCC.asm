@@ -2410,12 +2410,15 @@ calcSubtBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0B14h
@@ -2432,12 +2435,15 @@ calcSubtBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase5LoadNumChecker
+	push ax
 	;insert computation process here	
 	mov ah,02h	
 	mov dx,0D19h
@@ -2446,6 +2452,137 @@ calcSubtBase5:;BASE 5 Sub Menu after pumili ng base sa addition submenu ng calcu
 	lea dx, calcSubtBase5SubMenuDiff
 	int 21h		
 	;put the answer here
+	pop dx
+    mov cl, dl
+    pop dx
+    mov bl, dl
+    pop dx
+    mov bh, dl
+        
+    mov ch, 04h
+    mov al, 04h
+    mov ah, 04h
+    
+	sub cl, 30h
+	sub bl, 30h
+	sub bh, 30h
+	
+    sub ch, cl
+    sub al, bl
+    sub ah, bh
+	
+	pop dx
+    mov cl, dl
+    pop dx
+    mov bl, dl
+    pop dx
+    mov bh, dl
+	
+	sub cl, 30h
+	sub bl, 30h
+	sub bh, 30h
+	
+	add	ch, cl
+	
+    cmp ch, 05h
+    jb SubB51
+    sub ch, 05h
+    add al, 01h
+SubB51:
+	add al, bl
+    cmp al, 05h
+    jb SubB52
+    sub al, 05h
+    add ah, 01h
+SubB52:
+	add ah, bh
+	mov bh, 00h
+    cmp ah, 05h
+    jb SubB53
+    sub ah, 05h
+	add bh, 01h
+SubB53: 
+	cmp bh, 00h
+	ja PositiveB5
+
+    mov dh, ah
+	mov bl, al
+
+    mov cl, 04h
+    mov bl, 04h
+    mov bh, 04h
+	
+	sub cl, ch
+	sub bl, al
+	sub bh, ah
+
+	add bx, 3030h
+	add cl, 30h
+	
+	cmp bx, 3030h 
+	je checkCl
+	jmp NegativeB5
+checkCl:
+	cmp cl, 30h	 
+	je ZeroB5
+;*********Negative Printing********  	
+NegativeB5:
+	mov ah, 02h
+	mov dl, 2Dh
+	int 21h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase5Sub
+;*********zero Printing********  
+ZeroB5:
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase5Sub
+;*********Positive Printing********  
+PositiveB5:
+	mov bx, ax
+	add ch, 01h
+	cmp ch, 05h
+	jb direct1
+	add bl, 01h
+	sub ch, 05h
+	cmp bl, 05h
+	jb direct1
+	add bh, 01h
+	sub bl, 05h
+	direct1:
+	add bx, 3030h
+	add ch, 30h
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, ch
+	int 21h
+ReuseBase5Sub:
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -2546,12 +2683,15 @@ calcSubtBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng cal
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	;insert computation process here	
 	mov ah,02h	
 	mov dx,0B14h
@@ -2568,12 +2708,15 @@ calcSubtBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng cal
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase16LoadLetterNumErrorInput
+	push ax
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0D19h
@@ -2582,6 +2725,208 @@ calcSubtBase16:;BASE 16 Sub Menu after pumili ng base sa addition submenu ng cal
 	lea dx, calcSubtBase16SubMenuDiff
 	int 21h		
 	;put the answer here
+pop1:
+	pop dx		;46
+    mov cl, dl  
+	cmp cl,39h  
+	jbe clsub
+	sub cl,37h  ;0F
+	jmp pop2
+	clsub:
+	sub cl,30h
+pop2:
+    pop dx		;45
+    mov bl, dl
+	cmp bl,39h
+	jbe blsub
+	sub bl,37h  ;0E
+	jmp pop3
+	blsub:
+	sub bl,30h
+pop3:
+    pop dx		;46
+    mov bh, dl
+	cmp bh,39h
+	jbe bhsub
+	sub bh,37h	;0F
+	jmp r1
+	bhsub:
+	sub bh,30h
+r1:       
+    mov ch,0Fh  ;f-f=0
+    mov al,0Fh	;f-e=1
+    mov ah,0Fh	;f-f=0
+	
+    sub ch, cl
+    sub al, bl
+    sub ah, bh
+
+pop4:	
+	pop dx		;46
+    mov cl, dl
+	cmp cl,39h
+	jbe clsub2
+	sub cl,37h  ;0f
+	jmp pop5
+	clsub2:
+	sub cl,30h
+pop5:    
+	pop dx		;46
+    mov bl, dl
+	cmp bl,39h
+	jbe blsub2
+	sub bl,37h  ;0f
+	jmp pop6
+	blsub2:
+	sub bl,30h
+pop6:    
+	pop dx  	;46
+    mov bh, dl
+	cmp bh,39h
+	jbe bhsub2
+	sub bh,37h	;0f
+	jmp nextchecker
+	bhsub2:
+	sub bh,30h
+	
+	
+nextchecker:	
+	add	ch, cl  ;0+F=F
+	
+    cmp ch, 10h
+    jb SubB161
+    sub ch, 10h
+    add al, 01h
+SubB161:
+	add al, bl  ;1+F=10
+    cmp al, 10h
+    jb SubB162
+    sub al, 10h
+    add ah, 01h
+SubB162:
+	add ah, bh  ;1+F=10
+	mov bh, 00h
+    cmp ah, 10h
+    jb SubB163
+    sub ah, 10h
+	add bh, 01h ;01
+SubB163: 
+	cmp bh, 00h
+	ja positiveb16
+    mov dh, ah
+	mov bl, al
+
+    mov cl, 0Fh
+    mov bl, 0Fh
+    mov bh, 0Fh
+	
+	sub cl, ch
+	cmp cl,09h
+	jbe clsub3
+	add cl,37h
+	jmp a
+	clsub3:
+	add cl,30h
+	a:
+	sub bl, al
+	cmp bl,09h
+	jbe blsub3
+	add bl,37h
+	jmp b
+	blsub3:
+	add bl,30h
+	b:
+	sub bh, ah
+	cmp bh, 09h
+	jbe bhsub3
+	add bh,37h
+	jmp zerocheck
+	bhsub3:
+	add bh,30h
+	zerocheck:
+	cmp bx, 3030h 
+	je checkClb16
+	jmp negativeb16
+checkClb16:
+	cmp cl, 30h	 
+	je Zerob16
+;*********Negative Printing********  	
+negativeb16:
+	mov ah, 02h
+	mov dl, 2Dh
+	int 21h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase16Sub
+;*********zero Printing********  
+Zerob16:
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase16Sub
+;*********Positive Printing********  
+positiveb16:
+	mov bx, ax
+	add ch, 01h
+	cmp ch, 10h
+	jb directb16
+	add bl, 01h
+	sub ch, 10h
+	cmp bl, 10h
+	jb directb16
+	add bh, 01h
+	sub bl, 10h
+	directb16:
+	cmp bh,	09h
+	jg add37
+	add bh, 30h
+	jmp nextcheckerb16sub
+	add37:
+	add bh,37h
+	nextcheckerb16sub:
+	cmp bl, 09h
+	jg add372
+	add bl, 30h
+	jmp nextcheckerb16sub2
+	add372:
+	add bl, 37h
+	nextcheckerb16sub2:
+	cmp ch,	09h
+	jg add373
+	add ch, 30h
+	jmp printingb16sub
+	add373:
+	add ch, 37h
+	printingb16sub:
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, ch
+	int 21h
+ReuseBase16Sub:
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -2686,12 +3031,15 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0B14h
@@ -2702,19 +3050,22 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 01h ;second input
 	int 21h
 	cmp al, 30h
-	JnE CalcSubtBase2LoadNumErrorInput2
+	JnE Input2Error2Subt
 	mov ah, 02h
 	mov dl, 2Eh ; dot
 	int 21h
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcSubtBase2LoadNumChecker
+	push ax
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0D19h
@@ -2722,7 +3073,142 @@ calcSubtBase2:;BASE 2 Sub Menu after pumili ng base sa addition submenu ng calcu
 	mov ah, 09h
 	lea dx, calcSubtBase2SubMenuDiff
 	int 21h	
-	;put the answer here	
+	jmp processing
+Input2Error2Subt:
+	jmp CalcSubtBase2LoadNumErrorInput2
+	;put the answer here
+processing:
+	pop dx
+    mov cl, dl
+    pop dx
+    mov bl, dl
+    pop dx
+    mov bh, dl
+        
+    mov ch, 01h
+    mov al, 01h
+    mov ah, 01h
+    
+	sub cl, 30h
+	sub bl, 30h
+	sub bh, 30h
+	
+    sub ch, cl
+    sub al, bl
+    sub ah, bh
+	
+	pop dx
+    mov cl, dl
+    pop dx
+    mov bl, dl
+    pop dx
+    mov bh, dl
+	
+	sub cl, 30h
+	sub bl, 30h
+	sub bh, 30h
+	
+	add	ch, cl
+	
+    cmp ch, 02h
+    jb SubB21
+    sub ch, 02h
+    add al, 01h
+SubB21:
+	add al, bl
+    cmp al, 02h
+    jb SubB22
+    sub al, 02h
+    add ah, 01h
+SubB22:
+	add ah, bh
+	mov bh, 00h
+    cmp ah, 02h
+    jb SubB23
+    sub ah, 02h
+	add bh, 01h
+SubB23: 
+	cmp bh, 00h
+	ja PositiveB2
+
+    mov dh, ah
+	mov bl, al
+
+    mov cl, 01h
+    mov bl, 01h
+    mov bh, 01h
+	
+	sub cl, ch
+	sub bl, al
+	sub bh, ah
+
+	add bx, 3030h
+	add cl, 30h
+	
+	cmp bx, 3030h 
+	je checkClb2
+	jmp NegativeB2
+checkClb2:
+	cmp cl, 30h	 
+	je ZeroB2
+;*********Negative Printing********  	
+NegativeB2:
+	mov ah, 02h
+	mov dl, 2Dh
+	int 21h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase2Sub
+;*********zero Printing********  
+ZeroB2:
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, cl
+	int 21h
+	jmp ReuseBase2Sub
+;*********Positive Printing********  
+PositiveB2:
+	mov bx, ax
+	add ch, 01h
+	cmp ch, 02h
+	jb direct1b2
+	add bl, 01h
+	sub ch, 02h
+	cmp bl, 02h
+	jb direct1b2
+	add bh, 01h
+	sub bl, 02h
+	direct1b2:
+	add bx, 3030h
+	add ch, 30h
+	mov ah, 02h
+	mov dl, 30h
+	int 21h
+	mov dl, 2Eh
+	int 21h
+	mov dl, bh
+	int 21h
+	mov dl, bl
+	int 21h
+	mov dl, ch
+	int 21h
+ReuseBase2Sub:	
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -4206,8 +4692,7 @@ exitSwitch:
 	JnE ExitInvalidInput
 ExitYes:
 	call clrScreen
-	mov ah,02h
-	
+	mov ah,02h	
 	mov dx,0a15h
 	int 10h
 	mov ah, 09h
@@ -4221,4 +4706,3 @@ ExitInvalidInput:
 	call errorHomeInput	
 exit endp
 end main
-;test
