@@ -510,16 +510,28 @@ calcMulBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	mov ah,02h
 	mov dl, 2Eh ; dot ; dot
 	int 21h
+	xor bx,bx
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl bx,04
+	add bl,al
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl bx,04
+	add bl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl bx,04
+	add bl,al
+	push bx
 	;insert computation process here
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -529,19 +541,30 @@ calcMulBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	mov ah, 01h ;2ND input (0) 
 	int 21h
 	cmp al, 30h
-	JnE CalcMulBase5LoadNumErrorInput2
+	JnE JumpingJohn
 	mov ah, 02h
 	mov dl, 2Eh ; dot ; dot
 	int 21h
+	xor cx,cx
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl cx,04h
+	add cl,al
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl cx,04h
+	add cl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase5LoadNumChecker
+	sub al,30h
+	shl cx,04h
+	add cl,al
+	push cx
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0D19h
@@ -550,6 +573,341 @@ calcMulBase5:;BASE 5 Sub Menu after pumili ng base sa calcu
 	lea dx, calcMulBase5SubMenuProduct
 	int 21h		
 	;put the answer here
+	jmp firstb5
+JumpingJohn:
+	jmp	CalcMulBase5LoadNumErrorInput2
+firstb5:
+		;First Value
+	pop cx
+	pop bx
+	mov dx,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	
+	;Second Value
+	mov dx,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	
+	;Third Value
+	mov dx,0000h
+	mov ax,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,05h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	;All Values are pushed 
+	;Need to combine
+	mov ax,0000h
+	pop dx ;third
+	pop cx ;second
+	pop bx ;first
+	
+	mov ax,dx
+	shr ax,0Ch
+	push ax
+	;firstline end
+	mov ah,dh
+	and ah,0Fh
+	mov al,ch
+	shr al,04h
+	push ax
+	;secondline end
+	mov ah,dl
+	shr ah,04h
+	mov al,ch
+	shl al,04h
+	add al,ah
+	mov ah,bh
+	shr ah,04h
+	push ax
+	;thirdline end
+	mov al,dl
+	and al,0Fh
+	mov ah,cl
+	and ah,0F0h
+	add al,ah
+	mov ah,bh
+	and ah,0Fh
+	push ax
+	;fourthline end
+	mov al,cl
+	and al,0Fh
+	mov ah,bl
+	shr ah,04h
+	push ax
+	;fifthline
+	mov ax,bx
+	and ax,000Fh
+	push ax
+	
+	xor ax,ax
+	xor bx,bx
+	xor cx,cx
+	xor dx,dx
+	
+	pop bx
+	;first end
+	pop ax
+	add al,ah
+	cmp al,05h
+	jl skipdiv
+	mov ah,00
+	mov dl,05h
+	div dl
+	mov dh,al
+	shl ah,04h
+	add bl,ah
+	jmp thirdlinep
+	skipdiv:
+	mov dh,00h
+	shl al,04h
+	add bl,al
+	;second end
+	thirdlinep:
+	pop ax
+	mov dl,ah
+	mov ah,al
+	and al,0Fh
+	shr ah,04h
+	add al,ah
+	add al,dl
+	add al,dh
+	cmp al,05h
+	jl skipdiv2
+	mov ah,00
+	mov dl,05h
+	div dl
+	mov dh,al
+	add bh,ah
+	jmp fourthlinep
+	skipdiv2:
+	mov dh,00h
+	add bh,al
+	;third end
+	fourthlinep:
+	pop ax
+	mov dl,ah
+	mov ah,al
+	and al,0Fh
+	shr ah,04h
+	add al,ah
+	add al,dl
+	add al,dh
+	cmp al,05h
+	jl skipdiv3
+	mov ah,00
+	mov dl,05h
+	div dl
+	mov dh,al
+	shl ah,04h
+	add bh,ah
+	jmp fifthlinep
+	skipdiv3:
+	mov dh,00h
+	shl al,04h
+	add bh,al
+	;fourth end
+	fifthlinep:
+	pop ax
+	add al,ah
+	add al,dh
+	cmp al,05h
+	jl skipdiv4
+	mov ah,00
+	mov dl,05h
+	div dl
+	mov dh,al
+	add cl,ah
+	jmp sixthlinep
+	skipdiv4:
+	mov dh,00h
+	add cl,al
+	;fifth end
+	sixthlinep:
+	pop ax
+	add al,dh
+	shl al,04h
+	add cl,al
+	;sixth end 
+	;finish na?
+	
+	mov bl, bh
+    mov bh, cl
+    
+    mov dh, bh
+    mov cl, bl ;ito ang titignan
+    and cl, 0Fh
+    mov ch, bl 
+    and ch, 0F0h
+    shr ch, 04h
+    
+    cmp cl, 04h
+    jae roundmulb5
+    jmp printmulb5
+    
+	roundmulb5:
+    add bx, 0010h
+    and bx, 0FFF0h
+    mov dx, bx
+    shr dx, 04h
+    and dx, 000Fh
+    cmp dl, 05h
+    jae roundmulb5first
+    jmp printmulb5
+	roundmulb5first:
+    add bx, 0100h
+    and bx, 0FF00h
+    mov dx, bx
+    shr dx, 08h
+    and dx, 000Fh
+    cmp dl, 05h
+    jae roundmulb5sec
+    jmp printmulb5
+	roundmulb5sec:
+    add bx, 0100h
+    and bx, 0F000h
+    
+	printmulb5:
+    mov ah, 02h
+    mov dl, 30h
+    int 21h
+    mov dl, 2Eh
+    int 21h
+    mov cx, 0003h
+	popinmulb5:
+    rol bx, 04h   
+    mov dx, bx
+    and dx, 000Fh
+    add dx, 3030h
+    int 21h
+    loop popinmulb5
+	
+
+ReuseBase5Mul:
+	
+	mov bx,0000h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -647,15 +1005,47 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	mov ah,02h
 	mov dl, 2Eh ; dot ;dot
 	int 21h
+	xor bx,bx
+	mov cl,03h
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
-	mov ah, 01h ;2ND decimal place
+	cmp al,39h
+	jg sub37A
+	sub al,30h
+	jmp shippingA
+	sub37A:
+	sub al,37h
+	shippingA:
+	shl bx,04h
+	add bl,al
+	mov ah, 01h ;2nd decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg sub37A1
+	sub al,30h
+	jmp shippingA1
+	sub37A1:
+	sub al,37h
+	shippingA1:
+	shl bx,04h
+	add bl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg sub37A2
+	sub al,30h
+	jmp shippingA2
+	sub37A2:
+	sub al,37h
+	shippingA2:
+	shl bx,04h
+	add bl,al
+	push bx
+	xor bx,bx
+	xor cx,cx
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0B14h
@@ -672,12 +1062,39 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
-	mov ah, 01h ;2ND decimal place
+	cmp al,39h
+	jg sub37B
+	sub al,30h
+	jmp shippingB
+	sub37B:
+	sub al,37h
+	shippingB:
+	shl cx,04h
+	add cl,al
+	mov ah, 01h ;2nd decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg sub37B2
+	sub al,30h
+	jmp shippingB2
+	sub37B2:
+	sub al,37h
+	shippingB2:
+	shl cx,04h
+	add cl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase16LoadLetterNumErrorInput
+	cmp al,39h
+	jg sub37B3
+	sub al,30h
+	jmp shippingB3
+	sub37B3:
+	sub al,37h
+	shippingB3:
+	shl cx,04h
+	add cl,al
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0D19h
@@ -686,6 +1103,341 @@ calcMulBase16:;BASE 16 Sub Menu after pumili ng base sa calcu
 	lea dx, calcMulBase16SubMenuProduct
 	int 21h		
 	;put the answer here
+   ;process
+	pop bx
+	
+	;First Value
+	mov dx,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,cl
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	
+	;Second Value
+	mov dx,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,cl
+	shr dl,04h
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	
+	;Third Value
+	mov dx,0000h
+	mov ax,0000h
+	mov dl,bl
+	and dl,0Fh
+	mov al,dl
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov dl,bl
+	shr dl,04h
+	mov al,dl
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	mov dh,al
+	mov al,00h
+	push ax
+	
+	mov ax,0000h
+	mov al,bh
+	mov dl,ch
+	and dl,0Fh
+	mul dl
+	add al,dh
+	mov dl,10h
+	div dl
+	shl al,04h
+	add ah,al
+	mov al,00
+	pop dx
+	mov al,dh
+	shl al,04h
+	pop dx
+	add al,dh
+	push ax
+	;All Values are pushed 
+	;Need to combine
+	mov ax,0000h
+	pop dx ;third
+	pop cx ;second
+	pop bx ;first
+	
+	mov ax,dx
+	shr ax,0Ch
+	push ax
+	;firstline end
+	mov ah,dh
+	and ah,0Fh
+	mov al,ch
+	shr al,04h
+	push ax
+	;secondline end
+	mov ah,dl
+	shr ah,04h
+	mov al,ch
+	shl al,04h
+	add al,ah
+	mov ah,bh
+	shr ah,04h
+	push ax
+	;thirdline end
+	mov al,dl
+	and al,0Fh
+	mov ah,cl
+	and ah,0F0h
+	add al,ah
+	mov ah,bh
+	and ah,0Fh
+	push ax
+	;fourthline end
+	mov al,cl
+	and al,0Fh
+	mov ah,bl
+	shr ah,04h
+	push ax
+	;fifthline
+	mov ax,bx
+	and ax,000Fh
+	push ax
+	
+	xor ax,ax
+	xor bx,bx
+	xor cx,cx
+	xor dx,dx
+	
+	pop bx
+	;first end
+	pop ax
+	add al,ah
+	cmp al,10h
+	jl skipdivb16
+	mov ah,00
+	mov dl,10h
+	div dl
+	mov dh,al
+	shl ah,04h
+	add bl,ah
+	jmp thirdlinepb16
+	skipdivb16:
+	mov dh,00h
+	shl al,04h
+	add bl,al
+	;second end
+	thirdlinepb16:
+	pop ax
+	mov dl,ah
+	mov ah,al
+	and al,0Fh
+	shr ah,04h
+	add al,ah
+	add al,dl
+	add al,dh
+	cmp al,10h
+	jl skipdiv2b16
+	mov ah,00
+	mov dl,10h
+	div dl
+	mov dh,al
+	add bh,ah
+	jmp fourthlinepb16
+	skipdiv2b16:
+	mov dh,00h
+	add bh,al
+	;third end
+	fourthlinepb16:
+	pop ax
+	mov dl,ah
+	mov ah,al
+	and al,0Fh
+	shr ah,04h
+	add al,ah
+	add al,dl
+	add al,dh
+	cmp al,10h
+	jl skipdiv3b16
+	mov ah,00
+	mov dl,10h
+	div dl
+	mov dh,al
+	shl ah,04h
+	add bh,ah
+	jmp fifthlinepb16
+	skipdiv3b16:
+	mov dh,00h
+	shl al,04h
+	add bh,al
+	;fourth end
+	fifthlinepb16:
+	pop ax
+	add al,ah
+	add al,dh
+	cmp al,10h
+	jl skipdiv4b16
+	mov ah,00
+	mov dl,10h
+	div dl
+	mov dh,al
+	add cl,ah
+	jmp sixthlinepb16
+	skipdiv4b16:
+	mov dh,00h
+	add cl,al
+	;fifth end
+	sixthlinepb16:
+	pop ax
+	add al,dh
+	shl al,04h
+	add cl,al
+	;sixth end 
+	;finish na?
+	
+	mov bl, bh
+    mov bh, cl
+    
+    mov dh, bh
+    mov cl, bl ;ito ang titignan
+    and cl, 0Fh
+    mov ch, bl 
+    and ch, 0F0h
+    shr ch, 04h
+    
+    cmp cl, 0Fh
+    jae roundmulb2b16
+    jmp printmulb2b16
+    
+	roundmulb2b16:
+    add bx, 0010h
+    and bx, 0FFF0h
+    mov dx, bx
+    shr dx, 04h
+    and dx, 000Fh
+    cmp dl, 10h
+    jae roundmulb2firstb16
+    jmp printmulb2b16
+	roundmulb2firstb16:
+    add bx, 0100h
+    and bx, 0FF00h
+    mov dx, bx
+    shr dx, 08h
+    and dx, 000Fh
+    cmp dl, 10h
+    jae roundmulb2secb16
+    jmp printmulb2b16
+	roundmulb2secb16:
+    add bx, 0100h
+    and bx, 0F000h
+    
+	printmulb2b16:
+    mov ah, 02h
+    mov dl, 30h
+    int 21h
+    mov dl, 2Eh
+    int 21h
+    mov cx, 0003h
+	popinmulb2b16:
+    rol bx, 04h   
+    mov dx, bx
+    and dx, 000Fh
+	cmp dx,	0009h
+	jg add37ABC
+    add dx, 3030h
+	jmp displayb16
+	add37ABC:
+	add dx,	3037h
+	displayb16:
+    int 21h
+    loop popinmulb2b16
+ReuseBase16Mul:
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -787,15 +1539,25 @@ calcMulBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	mov ah,02h
 	mov dl, 2Eh ; dot
 	int 21h
+	xor cx,cx
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
+	sub al,30h
+	shl cx,04
+	add cl,al
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
+	sub al,30h
+	shl cx,04
+	add cl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
+	sub al,30h
+	shl cx,04
+	add cl,al
 	;insert computation process here
 	mov ah,02h
 	mov dx,0B14h
@@ -806,28 +1568,305 @@ calcMulBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	mov ah, 01h ;second input
 	int 21h
 	cmp al, 30h
-	JnE CalcMulBase2LoadNumErrorInput2
+	JnE JumpingJack
 	mov ah, 02h
 	mov dl, 2Eh ; dot
 	int 21h
+	xor bx,bx
 	mov ah, 01h ;1st decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
+	sub al,30h
+	shl bx,04h
+	add bl,al
 	mov ah, 01h ;2ND decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
+	sub al,30h
+	shl bx,04h
+	add bl,al
 	mov ah, 01h ;3rd decimal place
 	int 21h
 	call CalcMulBase2LoadNumChecker
-	;insert computation process here	
+	sub al,30h
+	shl bx,04h
+	add bl,al
+	push bx
+	;insert computation process here
+	mov bh,00h
 	mov ah,02h
 	mov dx,0D19h
 	int 10h
 	mov ah, 09h
 	lea dx, calcMulBase2SubMenuProduct
 	int 21h	
-	;put the answer here	
+	;put the answer here
+	;cx Multiplicand
+	;bx Multiplier
+	jmp firstfirts
+	JumpingJack:
+	jmp CalcMulBase2LoadNumErrorInput2
+firstfirts:
+;1st
+	pop bx
+	mov ax,cx
+	mov dx,bx
+	and ax,000Fh
+	and dx,000Fh
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,00F0h
+	shr ax,04h
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,0F00h
+	shr ax,08h
+	mul dl
+	shl ax,08h
+	pop dx
+	add al,dl
+	shl al,04h
+	pop dx 
+	add al,dl
+	push ax
+;2nd	
+	mov ax,cx
+	mov dx,bx
+	and ax,000Fh
+	and dx,00F0h
+	shr dx,04h
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,00F0h
+	shr ax,04h
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,0F00h
+	shr ax,08h
+	mul dl
+	shl ax,08h
+	pop dx
+	add al,dl
+	shl al,04h
+	pop dx 
+	add al,dl
+	push ax
+;3rd
+	mov ax,cx
+	mov dx,bx
+	and ax,000Fh
+	and dx,0F00h
+	shr dx,08h
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,00F0h
+	shr ax,04h
+	mul dl
+	push ax
+	mov ax,cx
+	and ax,0F00h
+	shr ax,08h
+	mul dl
+	shl ax,08h
+	pop dx
+	add al,dl
+	shl al,04h
+	pop dx 
+	add al,dl
+	push ax
+	
+;line-up process
+    pop bx ;third value
+    pop cx ;second val
+    pop dx ;first val
+    
+    mov ax, bx
+    and ax, 0F000h
+    push ax
+    
+    mov ah, bh
+    and ah, 0Fh
+    mov al, ch
+    shr al, 04h
+    push ax
+    
+    mov al, bl
+    shr al, 04h
+    mov ah, ch
+    shl ah, 04h
+    add al, ah
+    mov ah, dh
+    shr ah, 04h
+    push ax
+    
+    mov al, bl
+    and al, 0Fh
+    mov ah, cl
+    and ah, 0F0h
+    add al, ah
+    mov ah, dh
+    and ah, 0Fh
+    push ax
+    
+    mov ah, dl
+    shr ah, 04h 
+    mov al, cl
+    and al, 0Fh
+    push ax
+    
+    mov al, dl
+    and ax, 000Fh
+    push ax
+	
+;addition process
+    mov cx, 0000h
+    mov dx, 0000h
+    pop bx ;first line up
+    
+    pop ax ;second line up
+    add al, ah
+    cmp al, 0Bh
+    jae first_div
+    shl al, 04h
+    add bl, al
+    jmp third_process
+first_div:
+    mov ah, 00h
+    mov dl, 0Bh
+    div dl
+    shl ah, 04h
+    add bl, ah
+    mov dh, al
+    
+third_process:
+    pop ax ;third line-up
+    mov dl, al
+    and al, 0Fh
+    shr dl, 04h
+    add al, dl
+    add ah, dh
+    mov dh, 00h
+    add al, ah
+    cmp al, 02h
+    jae sec_div
+    add bh, al
+    jmp fourth_process
+sec_div:
+    mov ah, 00h
+    mov dl, 02h
+    div dl
+    add bh, ah
+    mov dh, al
+    
+fourth_process:
+    pop ax ;fourth line-up
+    mov dl,al
+    and al, 0Fh
+    shr dl, 04h
+    add al, dl
+    add ah, dh
+    mov dh, 00h
+    add al, ah
+    cmp al, 02h
+    jae third_div
+    shl al, 04h
+    add bh, al
+    jmp fifth_process
+third_div:
+    mov ah, 00h
+    mov dl, 02h
+    div dl
+    shl ah, 04h
+    add bh, ah
+    mov dh, al
+    
+fifth_process:
+    pop ax ;fifth line-up
+    add al, ah
+    add al, dh
+    mov dh, 00h
+    cmp al, 0h
+    jae fourth_div
+    add cl, al
+    jmp final_proccess
+fourth_div:
+    mov ah, 00h
+    mov dl, 02h
+    div dl
+    add cl, ah
+    mov dh, al  
+final_proccess:
+    pop ax
+    mov al, dh
+    shl al, 04h
+    add al, ah
+    add cl, al
+    push cx
+    push bx
+	
+ResultPrinting:
+	pop bx
+    pop cx
+    
+    mov bl, bh
+    mov bh, cl
+    
+    mov dh, bh
+    mov cl, bl ;ito ang titignan
+    and cl, 0Fh
+    mov ch, bl 
+    and ch, 0F0h
+    shr ch, 04h
+    
+    cmp cl, 01h
+    jae roundmulb2
+    jmp printmulb2
+    
+roundmulb2:
+     add bx, 0010h
+     and bx, 0FFF0h
+     mov dx, bx
+     shr dx, 04h
+     and dx, 000Fh
+     cmp dl, 02h
+     jae roundmulb2first
+     jmp printmulb2
+roundmulb2first:
+     add bx, 0100h
+     and bx, 0FF00h
+     mov dx, bx
+     shr dx, 08h
+     and dx, 000Fh
+     cmp dl, 02h
+     jae roundmulb2sec
+     jmp printmulb2
+roundmulb2sec:
+     add bx, 0100h
+     and bx, 0F000h
+    
+printmulb2:
+    mov ah, 02h
+    mov dl, 30h
+    int 21h
+    mov dl, 2Eh
+    int 21h
+    mov cx, 0003h
+popinmulb2:
+    rol bx, 04h   
+    mov dx, bx
+    and dx, 000Fh
+    add dx, 3030h
+    int 21h
+    loop popinmulb2
+
+ReuseMultiplicationBase2:
 	mov ah,02h
+	mov bx,0000h
 	mov dx,0f17h
 	int 10h
 	mov ah, 09h
@@ -1288,16 +2327,19 @@ calcDivBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	mov ah,02h
 	mov dl, 2Eh ; dot
 	int 21h
-	mov ah, 01h ;1st decimal place
+	xor bx,bx
+	mov cl,03h
+AA:
+	mov ah, 01h 
 	int 21h
 	call CalcDivBase2LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcDivBase2LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcDivBase2LoadNumChecker
+	and ax, 0001h
+    shl bx, 01h
+    or bx, ax
+	loop AA
+	push bx
 	;insert computation process here
+	xor bx,bx
 	mov ah,02h	
 	mov dx,0B14h
 	int 10h
@@ -1307,19 +2349,21 @@ calcDivBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	mov ah, 01h ;second input
 	int 21h
 	cmp al, 30h
-	JnE CalcDivBase2LoadNumErrorInput2
+	JnE jumpingrope
 	mov ah, 02h
 	mov dl, 2Eh ; dot
 	int 21h
-	mov ah, 01h ;1st decimal place
+	mov cl,03h
+BB:
+	mov ah, 01h 
 	int 21h
 	call CalcDivBase2LoadNumChecker
-	mov ah, 01h ;2ND decimal place
-	int 21h
-	call CalcDivBase2LoadNumChecker
-	mov ah, 01h ;3rd decimal place
-	int 21h
-	call CalcDivBase2LoadNumChecker
+	and ax, 0001h
+    shl bx, 01h
+    or bx, ax
+	loop BB
+	push bx
+	xor bx,bx
 	;insert computation process here
 	mov ah,02h	
 	mov dx,0D19h
@@ -1328,6 +2372,53 @@ calcDivBase2:;BASE 2 Sub Menu after pumili ng base sa calcu
 	lea dx, calcDivBase2SubMenuQuo
 	int 21h		
 	;put the answer here
+	jmp divide2
+	
+jumpingrope:
+	jmp CalcDivBase2LoadNumErrorInput2
+divide2:
+	pop bx
+    pop ax
+    div bl
+    push ax
+    
+    mov bl, al
+    mov ah, 02h
+    mov cl, 04h
+.out1:
+    mov dl, bl
+    dec cl
+    shr dl, cl
+    inc cl
+    and dl, 01h
+    add dl, 30h
+	int 21h
+    loop .out1
+	
+	mov bh,00h
+	mov ah,02h
+    mov dx,0E19h
+    int 10h
+    mov ah, 09h
+    lea dx, calcModuloBase2SubMenuQuo
+    int 21h
+	
+	pop ax
+    mov bl, ah
+    mov ah, 02h
+    mov cl, 04h
+.out2:
+    mov dl, bl
+    dec cl
+    shr dl, cl
+    inc cl
+    and dl, 01h
+    add dl, 30h
+    int 21h
+    loop .out2
+	
+ReuseBase2Div:
+	mov bh,00h
 	mov ah,02h	
 	mov dx,0f17h
 	int 10h
@@ -4071,19 +5162,89 @@ convBase7to4SubMenuScreen:;BASE 7 Sub Menu after pumili ng base sa CONVERSION su
 	mov dl, 2Eh ; dot
 	int 21h
 	
-	mov cl, 03h
+
 convBase7to4Input:	
 	mov ah, 01h
 	int 21h
 	call convBase7to4LoadNumChecker
+	sub al,30h
+	mov cl,al
 
-	loop convBase7to4Input
+	mov ah, 01h
+	int 21h
+	call convBase7to4LoadNumChecker
+	sub al,30h
+	mov ch,al
+	
+	mov ah, 01h
+	int 21h
+	call convBase7to4LoadNumChecker
+	sub al,30h
+	mov bl,al
 	
 	call convBase7to4OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase7to4OutputSubMenu
 	int 21h		
+	;process
+	mov dx,0000h
+	mov al,cl
+	mov cl,31h
+	mul cl
+	add dx,ax
+	mov al,ch
+	mov ch,07h
+	mul ch
+	add dx,ax
+	mov al,bl
+	mov bl,01h
+	mul bl
+	add dx,ax
 	
+	mov bx,0004h
+	mov ax,dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	
+
+printb7tob4:
+	mov ah,02h
+	mov dl,30h
+	int 21h
+	mov dl,2Eh
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	
+	
+ReuseConversionB7toB4:
+	mov bh,00h
 	call convBase7to4SubMenuAgaincntr
 	mov ah, 09h
 	lea dx, convBase7to4SubMenuAgain ;use again
@@ -4301,19 +5462,78 @@ convBase5to10SubMenuScreen:;BASE 5 Sub Menu after pumili ng base sa CONVERSION s
 	mov dl, 2Eh ; dot
 	int 21h
 	
-	mov cl, 03h
-convBase5to10Input:	
+	
+convBase5to10Input:
+		;input1
 	mov ah, 01h
 	int 21h
 	call convBase5to10LoadNumChecker
-
-	loop convBase5to10Input
+	sub al,30h
+	mov cl,al
+		;input2
+	mov ah, 01h
+	int 21h
+	call convBase5to10LoadNumChecker
+	sub al,30h
+	mov ch,al
+		;input3
+	mov ah, 01h
+	int 21h
+	call convBase5to10LoadNumChecker
+	sub al,30h
+	mov bl,al
 	
 	call convBase5to10OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase5to10OutputSubMenu
 	int 21h		
+	;process
+	mov dx,0000h
+	mov al,cl
+	mov cl,19h
+	mul cl
+	add dl,al
+	mov al,ch
+	mov ch,05h
+	mul ch
+	add dl,al
+	mov al,bl
+	mov bl,01h
+	mul bl
+	add dl,al
 	
+	mov bx,000Ah
+	mov ax,dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	div bx
+	push dx
+	xor dx,dx
+	
+printb5tob10:
+	mov ah,02h
+	mov dl,30h
+	int 21h
+	mov dl,2Eh
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+	pop dx
+	add dl,30h
+	int 21h
+
+	
+ReuseConversionB5toB10:	
+	mov bh,00h
 	call convBase5to10SubMenuAgaincntr
 	mov ah, 09h
 	lea dx, convBase5to10SubMenuAgain ;use again
@@ -4551,19 +5771,76 @@ convBase2to8SubMenuScreen:;BASE 2 Sub Menu after pumili ng base sa CONVERSION su
 	mov dl, 2Eh ; dot
 	int 21h
 	
+	mov dx,0000h
 	mov cl, 03h
 convBase2to8Input:	
 	mov ah, 01h
 	int 21h
 	call convBase2to8LoadNumChecker
-
+	shl dx,04h
+	sub al,30h
+	add dl,al
 	loop convBase2to8Input
+	push dx
 	
 	call convBase2to8OutputSubMenucntr;sum
 	mov ah, 09h
 	lea dx, convBase2to8OutputSubMenu
 	int 21h		
 	
+	pop cx
+	cmp cx,0111h
+	je b8_7
+	cmp cx,0110h
+	je b8_6
+	cmp cx,0101h
+	je b8_5
+	cmp cx,0100h
+	je b8_4
+	cmp cx,0011h
+	je b8_3
+	cmp cx,0010h
+	je b8_2
+	cmp cx,0001h
+	je b8_1 
+	jmp b8_0
+b8_7:
+	mov bl,37h
+	jmp printing
+b8_6:
+	mov bl,36h
+	jmp printing
+b8_5:
+	mov bl,35h
+	jmp printing
+b8_4:
+	mov bl,34h
+	jmp printing
+b8_3:
+	mov bl,33h
+	jmp printing
+b8_2:
+	mov bl,32h
+	jmp printing
+b8_1:
+	mov bl,31h
+	jmp printing
+b8_0:
+	mov bl,30h
+printing:
+	mov ah,02h
+	mov dl,30h
+	int 21h
+	mov dl,2Eh
+	int 21h
+	mov dl,30h
+	int 21h
+	mov dl,30h
+	int 21h
+	mov dl,bl
+	int 21h
+ReuseConversionB2toB8:
+	mov bh,00h
 	call convBase2to8SubMenuAgaincntr
 	mov ah, 09h
 	lea dx, convBase2to8SubMenuAgain ;use again
@@ -4692,7 +5969,8 @@ exitSwitch:
 	JnE ExitInvalidInput
 ExitYes:
 	call clrScreen
-	mov ah,02h	
+	mov ah,02h
+	
 	mov dx,0a15h
 	int 10h
 	mov ah, 09h
